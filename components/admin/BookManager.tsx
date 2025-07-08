@@ -25,14 +25,8 @@ const BookManager = () => {
         throw new Error('שגיאה בטעינת הספרים');
       }
       const data = await response.json();
-<<<<<<< HEAD
       // Books are already sorted by displayOrder from the API
       setBooks(data || []);
-=======
-      // Trier les livres par ID décroissant pour avoir les plus récents en premier
-      const sortedBooks = (data || []).sort((a: Book, b: Book) => b.id.localeCompare(a.id));
-      setBooks(sortedBooks);
->>>>>>> a14b6456c34c3a944956f90d05725ca4e48d1ed4
     } catch (error) {
       console.error('Error loading books:', error);
       toast("שגיאה בטעינת הספרים", "error");
@@ -48,7 +42,6 @@ const BookManager = () => {
       return;
     }
 
-<<<<<<< HEAD
     if (!currentBook.description?.trim()) {
       setError('נא להזין תיאור');
       return;
@@ -76,45 +69,6 @@ const BookManager = () => {
         method: currentBook.id ? 'PUT' : 'POST',
         body: formData,
       });
-=======
-    setIsSubmitting(true);
-    try {
-      let imageUrl = currentBook.imageUrl;
-
-      if (currentImage) {
-        const formData = new FormData();
-        formData.append('file', currentImage);
-        
-        const uploadResponse = await fetch('/api/upload', {
-          method: 'POST',
-          body: formData,
-        });
-        
-        if (!uploadResponse.ok) {
-          throw new Error('שגיאה בהעלאת התמונה');
-        }
-        
-        const { url } = await uploadResponse.json();
-        imageUrl = url;
-      }
-
-      const bookData = {
-        ...currentBook,
-        imageUrl
-      };
-
-      const response = currentBook.id
-        ? await fetch('/api/books', {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id: currentBook.id, ...bookData }),
-          })
-        : await fetch('/api/books', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(bookData),
-          });
->>>>>>> a14b6456c34c3a944956f90d05725ca4e48d1ed4
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -210,10 +164,7 @@ const BookManager = () => {
               onChange={(e) => setCurrentBook(prev => ({ ...prev, description: e.target.value }))}
               className="mt-1 block w-full rounded border-gray-300 shadow-sm"
               rows={3}
-<<<<<<< HEAD
               required
-=======
->>>>>>> a14b6456c34c3a944956f90d05725ca4e48d1ed4
             />
           </div>
 
