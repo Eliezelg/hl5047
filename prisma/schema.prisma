@@ -1,0 +1,99 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Rabbi {
+  id          String         @id @default(uuid())
+  firstName   String
+  lastName    String
+  topics      String[]
+  categories  RabbiCategory[]
+  address     String?
+  city        String?
+  description String?
+  languages   String[]
+  imageUrl    String?
+  qas         QA[]
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  @@map("rabbis")
+}
+
+model Book {
+  id              Int      @id @default(autoincrement())
+  title           String   @db.VarChar(500)
+  description     String?  @db.Text
+  price           String?  @db.VarChar(100)
+  imageUrl        String?  @db.VarChar(500)
+  nedarimPlusLink String?  @db.VarChar(500)
+  isNew           Boolean  @default(false)
+  displayOrder    Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("books")
+}
+
+model QA {
+  id         Int               @id @default(autoincrement())
+  topic      String           @db.VarChar(200)
+  category   QuestionCategory? @relation(fields: [categoryId], references: [id])
+  categoryId String?
+  question   String           @db.Text
+  answer     String?          @db.Text
+  status     String?          @default("pending")
+  author     Rabbi?           @relation(fields: [authorId], references: [id])
+  authorId   String?
+  askerEmail String?         @db.VarChar(255)
+  askerName  String?         @db.VarChar(100)
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  @@map("qa")
+}
+
+model RabbiCategory {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String?
+  rabbis      Rabbi[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("rabbi_categories")
+}
+
+model QuestionCategory {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String?
+  questions   QA[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("question_categories")
+}
+
+model Distributor {
+  id        String   @id @default(uuid())
+  name      String   @db.VarChar(255)
+  city      String   @db.VarChar(100)
+  phone     String?  @db.VarChar(50)
+  address   String?  @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("distributors")
+}
