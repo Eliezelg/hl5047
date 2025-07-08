@@ -15,7 +15,10 @@ export default function BooksAdminPage() {
   const [editingBook, setEditingBook] = useState<Book | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+<<<<<<< HEAD
   const [isReordering, setIsReordering] = useState(false);
+=======
+>>>>>>> a14b6456c34c3a944956f90d05725ca4e48d1ed4
   const { toast } = useToast();
 
   useEffect(() => {
@@ -122,6 +125,7 @@ export default function BooksAdminPage() {
     setCoverImage(null);
   };
 
+<<<<<<< HEAD
   const moveBook = (index: number, direction: 'up' | 'down') => {
     const newBooks = [...books];
     const newIndex = direction === 'up' ? index - 1 : index + 1;
@@ -195,6 +199,12 @@ export default function BooksAdminPage() {
       </div>
 
       {!isReordering && (
+=======
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-8 text-center">ניהול ספרים</h1>
+
+>>>>>>> a14b6456c34c3a944956f90d05725ca4e48d1ed4
       <form onSubmit={handleSubmit} className="max-w-2xl mx-auto mb-12 space-y-6">
         <div>
           <label className="block text-lg mb-2">כותרת</label>
@@ -282,6 +292,7 @@ export default function BooksAdminPage() {
           )}
         </div>
       </form>
+<<<<<<< HEAD
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -306,6 +317,12 @@ export default function BooksAdminPage() {
                 <span className="text-center font-bold">{index + 1}</span>
               </div>
             )}
+=======
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {books.map((book) => (
+          <div key={book.id} className="border rounded-lg p-4 shadow">
+>>>>>>> a14b6456c34c3a944956f90d05725ca4e48d1ed4
             {book.imageUrl && (
               <img
                 src={book.imageUrl}
@@ -333,6 +350,7 @@ export default function BooksAdminPage() {
                 חדש!
               </span>
             )}
+<<<<<<< HEAD
             {!isReordering && (
               <div className="flex justify-end space-x-2">
                 <button
@@ -349,6 +367,22 @@ export default function BooksAdminPage() {
                 </button>
               </div>
             )}
+=======
+            <div className="flex justify-end space-x-2">
+              <button
+                onClick={() => handleEdit(book)}
+                className="bg-yellow-500 text-white px-4 py-1 rounded hover:bg-yellow-600"
+              >
+                ערוך
+              </button>
+              <button
+                onClick={() => handleDelete(book.id)}
+                className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600"
+              >
+                מחק
+              </button>
+            </div>
+>>>>>>> a14b6456c34c3a944956f90d05725ca4e48d1ed4
           </div>
         ))}
       </div>

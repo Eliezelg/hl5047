@@ -10,9 +10,13 @@ const IMAGES_DIR = path.join(process.cwd(), 'public/Sfarim');
 export async function GET() {
   try {
     const books = await bookService.getAllBooks();
+<<<<<<< HEAD
     // Sort books by displayOrder
     const sortedBooks = books.sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0));
     return NextResponse.json(sortedBooks.map(convertPrismaBook));
+=======
+    return NextResponse.json(books.map(convertPrismaBook));
+>>>>>>> a14b6456c34c3a944956f90d05725ca4e48d1ed4
   } catch (error: any) {
     console.error('API Error - GET /api/books:', error);
     return NextResponse.json({ error: 'Error reading books' }, { status: 500 });
@@ -52,7 +56,10 @@ export async function POST(request: Request) {
       imageUrl,
       nedarimPlusLink,
       isNew,
+<<<<<<< HEAD
       displayOrder: 0,
+=======
+>>>>>>> a14b6456c34c3a944956f90d05725ca4e48d1ed4
     });
 
     return NextResponse.json(convertPrismaBook(book));
@@ -89,7 +96,10 @@ export async function PUT(request: Request) {
       imageUrl = `/Sfarim/${filename}`;
     }
 
+<<<<<<< HEAD
     const displayOrder = formData.get('displayOrder');
+=======
+>>>>>>> a14b6456c34c3a944956f90d05725ca4e48d1ed4
     const book = await bookService.updateBook(id, {
       title,
       description,
@@ -97,7 +107,10 @@ export async function PUT(request: Request) {
       ...(imageUrl && { imageUrl }),
       nedarimPlusLink: nedarimPlusLink || null,
       isNew,
+<<<<<<< HEAD
       ...(displayOrder !== null && { displayOrder: parseInt(displayOrder as string) }),
+=======
+>>>>>>> a14b6456c34c3a944956f90d05725ca4e48d1ed4
     });
 
     if (!book) {
