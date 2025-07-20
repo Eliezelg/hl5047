@@ -2,7 +2,9 @@ import { prisma } from '@/lib/prisma';
 
 export const bookService = {
   getAllBooks: async () => {
-    return prisma.book.findMany();
+    return prisma.book.findMany({
+      orderBy: { displayOrder: 'asc' }
+    });
   },
 
   getBookById: async (id: string) => {
@@ -21,6 +23,7 @@ export const bookService = {
     imageUrl?: string | null;
     nedarimPlusLink?: string | null;
     isNew?: boolean;
+    displayOrder?: number;
   }) => {
     return prisma.book.create({
       data,
@@ -36,6 +39,7 @@ export const bookService = {
       imageUrl?: string | null;
       nedarimPlusLink?: string | null;
       isNew?: boolean;
+      displayOrder?: number;
     }
   ) => {
     const numericId = parseInt(id, 10);

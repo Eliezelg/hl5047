@@ -22,6 +22,7 @@ export interface Book {
   imageUrl: string | null;
   nedarimPlusLink: string | null;
   isNew: boolean;
+  displayOrder: number | null;
 }
 
 export interface QA {
@@ -65,7 +66,8 @@ export const convertPrismaBook = (book: PrismaBook): Book => ({
   price: book.price,
   imageUrl: book.imageUrl,
   nedarimPlusLink: book.nedarimPlusLink,
-  isNew: book.isNew
+  isNew: book.isNew,
+  displayOrder: book.displayOrder
 });
 
 export const convertPrismaQA = (qa: PrismaQA): QA => ({

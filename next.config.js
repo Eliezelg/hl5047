@@ -60,6 +60,15 @@ const nextConfig = {
             value: 'no-cache, no-store, must-revalidate'
           }
         ]
+      },
+      {
+        source: '/Sfarim/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-cache, no-store, must-revalidate'
+          }
+        ]
       }
     ];
   },
