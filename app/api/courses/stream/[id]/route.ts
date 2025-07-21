@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const fileId = params.id;
+    const { id: fileId } = await params;
     const apiKey = process.env.GOOGLE_API_KEY;
     
     console.log('Streaming file:', fileId);
@@ -50,20 +50,24 @@ export async function GET(
         return NextResponse.json({ error: 'Failed to fetch file', details: errorText }, { status: 500 });
       }
       
+      const encodedName = encodeURIComponent(metadata.name || 'audio.mp3').replace(/'/g, '%27');
       return new NextResponse(apiResponse.body, {
         status: 200,
         headers: {
           'Content-Type': metadata.mimeType || 'audio/mpeg',
-          'Content-Disposition': `inline; filename="${metadata.name}"`,
+          'Content-Disposition': `inline; filename*=UTF-8''${encodedName}`,
           'Accept-Ranges': 'bytes',
         },
       });
     }
 
     // Set appropriate headers for audio streaming
+    // Encode filename properly for headers
+    const encodedFilename = encodeURIComponent(metadata.name || 'audio.mp3').replace(/'/g, '%27');
+    
     const headers = new Headers({
       'Content-Type': metadata.mimeType || 'audio/mpeg',
-      'Content-Disposition': `inline; filename="${metadata.name}"`,
+      'Content-Disposition': `inline; filename*=UTF-8''${encodedFilename}`,
       'Accept-Ranges': 'bytes',
     });
 
