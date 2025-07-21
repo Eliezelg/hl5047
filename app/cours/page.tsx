@@ -114,6 +114,12 @@ export default function CoursesPage() {
       // Vérifier si la réponse contient une erreur
       if (data.error) {
         console.error('Erreur API:', data.error);
+        if (data.details) {
+          console.error('Détails:', data.details);
+        }
+        if (data.hint) {
+          console.error('Conseil:', data.hint);
+        }
         processCourses([]);
         return;
       }
