@@ -74,10 +74,10 @@ export default function AudioPlayer({ fileId, onDownload }: AudioPlayerProps) {
   };
 
   return (
-    <div className="bg-gray-100 rounded-lg p-3 w-full">
+    <div className="bg-gray-100 rounded-lg p-3">
       <audio ref={audioRef} src={audioUrl} preload="metadata" />
       
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 w-[400px]">
         <div className="w-[150px] mr-2">
           <input
             type="range"

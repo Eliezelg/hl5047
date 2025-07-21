@@ -291,16 +291,16 @@ export default function CoursesPage() {
                     {folderCourses.map((course, index) => (
                       <div
                         key={course.id}
-                        className={`flex items-center justify-between p-4 hover:bg-gray-50 transition-colors ${
+                        className={`p-4 hover:bg-gray-50 transition-colors ${
                           index !== folderCourses.length - 1 ? 'border-b' : ''
                         }`}
                       >
-                        <div className="flex items-center gap-3 flex-1">
-                          <Music className="h-4 w-4 text-gray-400" />
-                          <div className="flex-1">
-                            <h3 className="font-medium">{course.title}</h3>
+                        <div className="flex items-center gap-3">
+                          <Music className="h-4 w-4 text-gray-400 flex-shrink-0" />
+                          <div className="min-w-0 mr-4">
+                            <h3 className="font-medium truncate">{course.title}</h3>
                             {course.description && (
-                              <p className="text-sm text-gray-600 mt-1">{course.description}</p>
+                              <p className="text-sm text-gray-600 mt-1 truncate">{course.description}</p>
                             )}
                             {course.duration && (
                               <div className="flex items-center gap-2 text-xs text-gray-500 mt-1">
@@ -309,16 +309,18 @@ export default function CoursesPage() {
                               </div>
                             )}
                           </div>
+                          <div className="ml-auto">
+                            <AudioPlayer
+                              fileId={course.driveUrl.match(/\/d\/([a-zA-Z0-9-_]+)/)?.[1] || ''}
+                              onDownload={() => {
+                                const fileId = course.driveUrl.match(/\/d\/([a-zA-Z0-9-_]+)/)?.[1];
+                                if (fileId) {
+                                  window.open(`/api/courses/download/${fileId}`, '_blank');
+                                }
+                              }}
+                            />
+                          </div>
                         </div>
-                        <AudioPlayer
-                          fileId={course.driveUrl.match(/\/d\/([a-zA-Z0-9-_]+)/)?.[1] || ''}
-                          onDownload={() => {
-                            const fileId = course.driveUrl.match(/\/d\/([a-zA-Z0-9-_]+)/)?.[1];
-                            if (fileId) {
-                              window.open(`/api/courses/download/${fileId}`, '_blank');
-                            }
-                          }}
-                        />
                       </div>
                     ))}
                   </div>
