@@ -2,6 +2,16 @@ import { NextResponse } from 'next/server';
 import { SimpleGoogleDriveService } from '@/services/simpleGoogleDrive';
 import { courseService } from '@/services/courses';
 
+interface Course {
+  id: string;
+  title: string;
+  description: string | null;
+  folder: string;
+  driveUrl: string;
+  duration: string | null;
+  order: number;
+}
+
 export async function GET() {
   try {
     const apiKey = process.env.GOOGLE_API_KEY;
@@ -24,8 +34,8 @@ export async function GET() {
     console.log('Drive data received:', JSON.stringify(driveData, null, 2));
     
     // Récupérer les cours existants
-    const existingCourses = await courseService.getAllCourses();
-    const existingUrlsMap = new Map(existingCourses.map((c: any) => [c.driveUrl, c]));
+    const existingCourses = await courseService.getAllCourses() as Course[];
+    const existingUrlsMap = new Map<string, Course>(existingCourses.map(c => [c.driveUrl, c]));
     
     let coursesAdded = 0;
     let coursesUpdated = 0;
