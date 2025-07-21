@@ -295,8 +295,8 @@ export default function CoursesPage() {
                           index !== folderCourses.length - 1 ? 'border-b' : ''
                         }`}
                       >
-                        <div className="flex items-center justify-between gap-4">
-                          <div className="flex items-center gap-3 min-w-0 flex-1">
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                          <div className="flex items-center gap-3 min-w-0">
                             <Music className="h-4 w-4 text-gray-400 flex-shrink-0" />
                             <div className="min-w-0">
                               <h3 className="font-medium truncate">{course.title}</h3>
@@ -311,15 +311,17 @@ export default function CoursesPage() {
                               )}
                             </div>
                           </div>
-                          <AudioPlayer
-                            fileId={course.driveUrl.match(/\/d\/([a-zA-Z0-9-_]+)/)?.[1] || ''}
-                            onDownload={() => {
-                              const fileId = course.driveUrl.match(/\/d\/([a-zA-Z0-9-_]+)/)?.[1];
-                              if (fileId) {
-                                window.open(`/api/courses/download/${fileId}`, '_blank');
-                              }
-                            }}
-                          />
+                          <div className="w-full sm:w-auto overflow-x-auto">
+                            <AudioPlayer
+                              fileId={course.driveUrl.match(/\/d\/([a-zA-Z0-9-_]+)/)?.[1] || ''}
+                              onDownload={() => {
+                                const fileId = course.driveUrl.match(/\/d\/([a-zA-Z0-9-_]+)/)?.[1];
+                                if (fileId) {
+                                  window.open(`/api/courses/download/${fileId}`, '_blank');
+                                }
+                              }}
+                            />
+                          </div>
                         </div>
                       </div>
                     ))}

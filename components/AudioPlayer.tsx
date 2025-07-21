@@ -74,11 +74,11 @@ export default function AudioPlayer({ fileId, onDownload }: AudioPlayerProps) {
   };
 
   return (
-    <div className="bg-gray-100 rounded-lg p-3">
+    <div className="bg-gray-100 rounded-lg p-3 w-full sm:w-auto">
       <audio ref={audioRef} src={audioUrl} preload="metadata" />
       
-      <div className="flex items-center gap-2 w-[400px]">
-        <div className="w-[150px]">
+      <div className="flex items-center gap-1 sm:gap-2 w-full sm:w-[400px]">
+        <div className="flex-1 sm:flex-none sm:w-[150px]">
           <input
             type="range"
             min="0"
@@ -89,9 +89,11 @@ export default function AudioPlayer({ fileId, onDownload }: AudioPlayerProps) {
           />
         </div>
 
-        <span className="text-xs text-gray-500 w-10 text-center flex-shrink-0">{formatTime(currentTime)}</span>
-        <span className="text-xs text-gray-500">/</span>
-        <span className="text-xs text-gray-500 w-10 text-center flex-shrink-0">{formatTime(duration)}</span>
+        <div className="flex items-center gap-1 flex-shrink-0">
+          <span className="text-xs text-gray-500">{formatTime(currentTime)}</span>
+          <span className="text-xs text-gray-500">/</span>
+          <span className="text-xs text-gray-500">{formatTime(duration)}</span>
+        </div>
 
         <div className="flex items-center gap-1 ml-auto">
           <button
