@@ -67,7 +67,7 @@ export const convertPrismaBook = (book: PrismaBook): Book => ({
   imageUrl: book.imageUrl,
   nedarimPlusLink: book.nedarimPlusLink,
   isNew: book.isNew,
-  displayOrder: book.displayOrder  
+  displayOrder: book.displayOrder
 });
 
 export const convertPrismaQA = (qa: PrismaQA): QA => ({

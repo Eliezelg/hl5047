@@ -42,7 +42,7 @@ export async function POST(request: Request) {
       const bytes = await image.arrayBuffer();
       const buffer = Buffer.from(bytes);
       await writeFile(imagePath, buffer);
-      imageUrl = `/Sfarim/${filename}`;
+      imageUrl = `/api/images/Sfarim/${filename}`;
     }
 
     const book = await bookService.createBook({
@@ -86,7 +86,7 @@ export async function PUT(request: Request) {
       const bytes = await image.arrayBuffer();
       const buffer = Buffer.from(bytes);
       await writeFile(imagePath, buffer);
-      imageUrl = `/Sfarim/${filename}`;
+      imageUrl = `/api/images/Sfarim/${filename}`;
     }
 
     const displayOrder = formData.get('displayOrder');
