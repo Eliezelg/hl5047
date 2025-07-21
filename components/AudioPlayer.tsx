@@ -78,7 +78,7 @@ export default function AudioPlayer({ fileId, onDownload }: AudioPlayerProps) {
       <audio ref={audioRef} src={audioUrl} preload="metadata" />
       
       <div className="flex items-center gap-2">
-        <div className="max-w-[200px] mr-2">
+        <div className="w-[150px] mr-2">
           <input
             type="range"
             min="0"
