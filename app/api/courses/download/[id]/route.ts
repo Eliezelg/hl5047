@@ -22,12 +22,34 @@ export async function GET(
     
     const metadata = await metadataResponse.json();
     
-    // Download the file
-    const downloadUrl = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${apiKey}`;
-    const fileResponse = await fetch(downloadUrl);
+    // For public files, use the direct download URL
+    const publicDownloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+    
+    // Try the public download URL
+    const fileResponse = await fetch(publicDownloadUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+      }
+    });
     
     if (!fileResponse.ok) {
-      return NextResponse.json({ error: 'Failed to download file' }, { status: 500 });
+      // Fallback to API method
+      const apiDownloadUrl = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${apiKey}`;
+      const apiResponse = await fetch(apiDownloadUrl);
+      
+      if (!apiResponse.ok) {
+        const errorText = await apiResponse.text();
+        console.error('Download failed:', errorText);
+        return NextResponse.json({ error: 'Failed to download file', details: errorText }, { status: 500 });
+      }
+      
+      return new NextResponse(apiResponse.body, {
+        status: 200,
+        headers: {
+          'Content-Type': metadata.mimeType || 'audio/mpeg',
+          'Content-Disposition': `attachment; filename="${metadata.name}"`,
+        },
+      });
     }
 
     // Set headers for download
