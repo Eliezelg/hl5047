@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { ExternalLink, Clock, Folder, FolderOpen, RefreshCw, ChevronRight, ChevronDown, Music, Download } from 'lucide-react';
+import dynamic from 'next/dynamic';
+
+const AudioPlayer = dynamic(() => import('@/components/AudioPlayer'), { ssr: false });
 
 interface Course {
   id: string;
@@ -296,24 +299,17 @@ export default function CoursesPage() {
                             )}
                           </div>
                         </div>
-                        <div className="flex gap-2">
-                          <a
-                            href={course.driveUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                          >
-                            <ExternalLink className="h-4 w-4" />
-                            <span>האזן</span>
-                          </a>
-                          <a
-                            href={`https://drive.google.com/uc?export=download&id=${course.driveUrl.match(/\/d\/([a-zA-Z0-9-_]+)/)?.[1]}`}
-                            className="inline-flex items-center gap-2 px-4 py-2 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
-                            download
-                          >
-                            <Download className="h-4 w-4" />
-                            <span>הורד</span>
-                          </a>
+                        <div className="flex-shrink-0 min-w-[300px]">
+                          <AudioPlayer
+                            fileId={course.driveUrl.match(/\/d\/([a-zA-Z0-9-_]+)/)?.[1] || ''}
+                            title={course.title}
+                            onDownload={() => {
+                              const fileId = course.driveUrl.match(/\/d\/([a-zA-Z0-9-_]+)/)?.[1];
+                              if (fileId) {
+                                window.open(`/api/courses/download/${fileId}`, '_blank');
+                              }
+                            }}
+                          />
                         </div>
                       </div>
                     ))}
