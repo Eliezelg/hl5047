@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Play, Pause, Download, Volume2, SkipBack, SkipForward } from 'lucide-react';
+import { Play, Pause, Download, SkipBack, SkipForward } from 'lucide-react';
 
 interface AudioPlayerProps {
   fileId: string;
@@ -13,7 +13,6 @@ export default function AudioPlayer({ fileId, title, onDownload }: AudioPlayerPr
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [volume, setVolume] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   
@@ -63,13 +62,6 @@ export default function AudioPlayer({ fileId, title, onDownload }: AudioPlayerPr
     }
   };
 
-  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newVolume = parseFloat(e.target.value);
-    setVolume(newVolume);
-    if (audioRef.current) {
-      audioRef.current.volume = newVolume;
-    }
-  };
 
   const skip = (seconds: number) => {
     if (!audioRef.current) return;
@@ -83,24 +75,13 @@ export default function AudioPlayer({ fileId, title, onDownload }: AudioPlayerPr
   };
 
   return (
-    <div className="bg-gray-100 rounded-lg p-4 w-full">
+    <div className="bg-gray-100 rounded-lg p-3 w-full">
       <audio ref={audioRef} src={audioUrl} preload="metadata" />
       
-      <div className="flex items-center justify-between mb-3">
-        <h4 className="font-medium text-sm truncate flex-1">{title}</h4>
-        <button
-          onClick={onDownload}
-          className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors"
-          title="הורד"
-        >
-          <Download className="h-5 w-5" />
-        </button>
-      </div>
-
-      <div className="flex items-center gap-3 mb-3">
+      <div className="flex items-center gap-2">
         <button
           onClick={() => skip(-10)}
-          className="p-2 hover:bg-gray-200 rounded-lg transition-colors"
+          className="p-1.5 hover:bg-gray-200 rounded-lg transition-colors flex-shrink-0"
           title="10 שניות אחורה"
         >
           <SkipBack className="h-4 w-4" />
@@ -109,52 +90,45 @@ export default function AudioPlayer({ fileId, title, onDownload }: AudioPlayerPr
         <button
           onClick={togglePlayPause}
           disabled={isLoading}
-          className="p-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors disabled:opacity-50"
+          className="p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors disabled:opacity-50 flex-shrink-0"
         >
           {isLoading ? (
-            <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+            <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
           ) : isPlaying ? (
-            <Pause className="h-5 w-5" />
+            <Pause className="h-4 w-4" />
           ) : (
-            <Play className="h-5 w-5 mr-0.5" />
+            <Play className="h-4 w-4 mr-0.5" />
           )}
         </button>
         
         <button
           onClick={() => skip(10)}
-          className="p-2 hover:bg-gray-200 rounded-lg transition-colors"
+          className="p-1.5 hover:bg-gray-200 rounded-lg transition-colors flex-shrink-0"
           title="10 שניות קדימה"
         >
           <SkipForward className="h-4 w-4" />
         </button>
-      </div>
 
-      <div className="space-y-2">
-        <div className="flex items-center gap-2">
-          <span className="text-xs text-gray-500 w-12 text-left">{formatTime(currentTime)}</span>
-          <input
-            type="range"
-            min="0"
-            max={duration || 0}
-            value={currentTime}
-            onChange={handleSeek}
-            className="flex-1 h-1 bg-gray-300 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer"
-          />
-          <span className="text-xs text-gray-500 w-12 text-right">{formatTime(duration)}</span>
-        </div>
+        <span className="text-xs text-gray-500 w-10 text-center flex-shrink-0">{formatTime(currentTime)}</span>
+        
+        <input
+          type="range"
+          min="0"
+          max={duration || 0}
+          value={currentTime}
+          onChange={handleSeek}
+          className="flex-1 h-1 bg-gray-300 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer"
+        />
+        
+        <span className="text-xs text-gray-500 w-10 text-center flex-shrink-0">{formatTime(duration)}</span>
 
-        <div className="flex items-center gap-2">
-          <Volume2 className="h-4 w-4 text-gray-500" />
-          <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.05"
-            value={volume}
-            onChange={handleVolumeChange}
-            className="w-20 h-1 bg-gray-300 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-2 [&::-webkit-slider-thumb]:h-2 [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer"
-          />
-        </div>
+        <button
+          onClick={onDownload}
+          className="p-1.5 text-green-600 hover:bg-green-50 rounded-lg transition-colors flex-shrink-0"
+          title="הורד"
+        >
+          <Download className="h-4 w-4" />
+        </button>
       </div>
     </div>
   );

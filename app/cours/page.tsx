@@ -321,18 +321,16 @@ export default function CoursesPage() {
                             )}
                           </div>
                         </div>
-                        <div className="flex-shrink-0 min-w-[300px]">
-                          <AudioPlayer
-                            fileId={course.driveUrl.match(/\/d\/([a-zA-Z0-9-_]+)/)?.[1] || ''}
-                            title={course.title}
-                            onDownload={() => {
-                              const fileId = course.driveUrl.match(/\/d\/([a-zA-Z0-9-_]+)/)?.[1];
-                              if (fileId) {
-                                window.open(`/api/courses/download/${fileId}`, '_blank');
-                              }
-                            }}
-                          />
-                        </div>
+                        <AudioPlayer
+                          fileId={course.driveUrl.match(/\/d\/([a-zA-Z0-9-_]+)/)?.[1] || ''}
+                          title={course.title}
+                          onDownload={() => {
+                            const fileId = course.driveUrl.match(/\/d\/([a-zA-Z0-9-_]+)/)?.[1];
+                            if (fileId) {
+                              window.open(`/api/courses/download/${fileId}`, '_blank');
+                            }
+                          }}
+                        />
                       </div>
                     ))}
                   </div>
