@@ -295,31 +295,31 @@ export default function CoursesPage() {
                           index !== folderCourses.length - 1 ? 'border-b' : ''
                         }`}
                       >
-                        <div className="flex items-center gap-3">
-                          <Music className="h-4 w-4 text-gray-400 flex-shrink-0" />
-                          <div className="min-w-0 mr-4">
-                            <h3 className="font-medium truncate">{course.title}</h3>
-                            {course.description && (
-                              <p className="text-sm text-gray-600 mt-1 truncate">{course.description}</p>
-                            )}
-                            {course.duration && (
-                              <div className="flex items-center gap-2 text-xs text-gray-500 mt-1">
-                                <Clock className="h-3 w-3" />
-                                <span>{course.duration}</span>
-                              </div>
-                            )}
+                        <div className="flex items-center justify-between gap-4">
+                          <div className="flex items-center gap-3 min-w-0 flex-1">
+                            <Music className="h-4 w-4 text-gray-400 flex-shrink-0" />
+                            <div className="min-w-0">
+                              <h3 className="font-medium truncate">{course.title}</h3>
+                              {course.description && (
+                                <p className="text-sm text-gray-600 mt-1 truncate">{course.description}</p>
+                              )}
+                              {course.duration && (
+                                <div className="flex items-center gap-2 text-xs text-gray-500 mt-1">
+                                  <Clock className="h-3 w-3" />
+                                  <span>{course.duration}</span>
+                                </div>
+                              )}
+                            </div>
                           </div>
-                          <div className="ml-auto">
-                            <AudioPlayer
-                              fileId={course.driveUrl.match(/\/d\/([a-zA-Z0-9-_]+)/)?.[1] || ''}
-                              onDownload={() => {
-                                const fileId = course.driveUrl.match(/\/d\/([a-zA-Z0-9-_]+)/)?.[1];
-                                if (fileId) {
-                                  window.open(`/api/courses/download/${fileId}`, '_blank');
-                                }
-                              }}
-                            />
-                          </div>
+                          <AudioPlayer
+                            fileId={course.driveUrl.match(/\/d\/([a-zA-Z0-9-_]+)/)?.[1] || ''}
+                            onDownload={() => {
+                              const fileId = course.driveUrl.match(/\/d\/([a-zA-Z0-9-_]+)/)?.[1];
+                              if (fileId) {
+                                window.open(`/api/courses/download/${fileId}`, '_blank');
+                              }
+                            }}
+                          />
                         </div>
                       </div>
                     ))}
