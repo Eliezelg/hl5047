@@ -96,14 +96,21 @@ const nextConfig = {
     gzipSize: true,
     disableOptimizedLoading: true
   },
-  webpack: (config) => {
-    config.resolve = {
-      ...config.resolve,
-      fallback: {
-        ...config.resolve.fallback,
-        fs: false,
-      },
-    };
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve = {
+        ...config.resolve,
+        fallback: {
+          ...config.resolve.fallback,
+          fs: false,
+          net: false,
+          tls: false,
+          dns: false,
+          child_process: false,
+          'googleapis': false,
+        },
+      };
+    }
     return config;
   },
 };
