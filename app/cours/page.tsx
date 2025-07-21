@@ -32,6 +32,15 @@ export default function CoursesPage() {
   const [mainFolders, setMainFolders] = useState<string[]>([]);
 
   const processCourses = (data: Course[]) => {
+    // Vérifier que data est bien un tableau
+    if (!Array.isArray(data)) {
+      console.error('Les données reçues ne sont pas un tableau:', data);
+      setCourses([]);
+      setGroupedCourses({});
+      setMainFolders([]);
+      return;
+    }
+    
     setCourses(data);
     
     // Grouper les cours par dossier
@@ -101,6 +110,13 @@ export default function CoursesPage() {
       // Sinon, récupérer depuis l'API
       const response = await fetch('/api/courses');
       const data = await response.json();
+      
+      // Vérifier si la réponse contient une erreur
+      if (data.error) {
+        console.error('Erreur API:', data.error);
+        processCourses([]);
+        return;
+      }
       
       // Mettre en cache
       localStorage.setItem(CACHE_KEY, JSON.stringify(data));
