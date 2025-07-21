@@ -78,7 +78,7 @@ export default function AudioPlayer({ fileId, onDownload }: AudioPlayerProps) {
       <audio ref={audioRef} src={audioUrl} preload="metadata" />
       
       <div className="flex items-center gap-2 w-[400px]">
-        <div className="w-[150px] mr-2">
+        <div className="w-[150px]">
           <input
             type="range"
             min="0"
@@ -93,7 +93,7 @@ export default function AudioPlayer({ fileId, onDownload }: AudioPlayerProps) {
         <span className="text-xs text-gray-500">/</span>
         <span className="text-xs text-gray-500 w-10 text-center flex-shrink-0">{formatTime(duration)}</span>
 
-        <div className="flex items-center gap-1 ml-2">
+        <div className="flex items-center gap-1 ml-auto">
           <button
             onClick={() => skip(-10)}
             className="p-1.5 hover:bg-gray-200 rounded-lg transition-colors flex-shrink-0"
@@ -127,7 +127,7 @@ export default function AudioPlayer({ fileId, onDownload }: AudioPlayerProps) {
 
         <button
           onClick={onDownload}
-          className="p-1.5 text-green-600 hover:bg-green-50 rounded-lg transition-colors flex-shrink-0 ml-auto"
+          className="p-1.5 text-green-600 hover:bg-green-50 rounded-lg transition-colors flex-shrink-0"
           title="הורד"
         >
           <Download className="h-4 w-4" />
