@@ -25,7 +25,7 @@ export async function GET() {
     
     // Récupérer les cours existants
     const existingCourses = await courseService.getAllCourses();
-    const existingUrlsMap = new Map(existingCourses.map(c => [c.driveUrl, c]));
+    const existingUrlsMap = new Map(existingCourses.map((c: any) => [c.driveUrl, c]));
     
     let coursesAdded = 0;
     let coursesUpdated = 0;
