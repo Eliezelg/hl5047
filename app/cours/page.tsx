@@ -160,13 +160,27 @@ export default function CoursesPage() {
     // Charger les cours au chargement de la page
     fetchCourses();
     
-    // Synchroniser automatiquement avec Google Drive
-    syncWithDrive();
+    // Vérifier si on doit synchroniser (une fois par jour à 3h du matin)
+    const checkAndSync = () => {
+      const now = new Date();
+      const lastSyncStr = localStorage.getItem('last_sync_date');
+      const lastSyncDate = lastSyncStr ? new Date(lastSyncStr) : null;
+      
+      // Si jamais synchronisé ou si plus de 24h se sont écoulées
+      if (!lastSyncDate || now.getTime() - lastSyncDate.getTime() > 24 * 60 * 60 * 1000) {
+        // Si c'est entre 3h et 4h du matin, ou si jamais synchronisé
+        if (!lastSyncDate || (now.getHours() === 3)) {
+          syncWithDrive().then(() => {
+            localStorage.setItem('last_sync_date', now.toISOString());
+          });
+        }
+      }
+    };
     
-    // Synchroniser toutes les 5 minutes
-    const interval = setInterval(() => {
-      syncWithDrive();
-    }, 5 * 60 * 1000);
+    checkAndSync();
+    
+    // Vérifier toutes les heures
+    const interval = setInterval(checkAndSync, 60 * 60 * 1000);
 
     return () => clearInterval(interval);
   }, []);
@@ -193,31 +207,6 @@ export default function CoursesPage() {
     <div className="container mx-auto px-4 py-8" dir="rtl">
       <div className="flex flex-col items-center mb-8">
         <h1 className="text-4xl font-bold text-center mb-4">שיעורי הרב</h1>
-        {syncing && (
-          <div className="flex items-center gap-2 text-sm text-gray-600">
-            <RefreshCw className="h-4 w-4 animate-spin" />
-            <span>מסנכרן עם Google Drive...</span>
-          </div>
-        )}
-        {lastSync && !syncing && (
-          <div className="flex flex-col items-center gap-2">
-            <p className="text-sm text-gray-500">
-              עדכון אחרון: {lastSync.toLocaleTimeString('he-IL')}
-            </p>
-            <button
-              onClick={() => {
-                localStorage.removeItem(CACHE_KEY);
-                localStorage.removeItem(CACHE_TIMESTAMP_KEY);
-                fetchCourses(true);
-                syncWithDrive();
-              }}
-              className="text-sm text-blue-600 hover:text-blue-800 underline flex items-center gap-1"
-            >
-              <RefreshCw className="h-3 w-3" />
-              רענן עכשיו
-            </button>
-          </div>
-        )}
       </div>
       
       {/* Menu horizontal des dossiers principaux */}
@@ -323,7 +312,6 @@ export default function CoursesPage() {
                         </div>
                         <AudioPlayer
                           fileId={course.driveUrl.match(/\/d\/([a-zA-Z0-9-_]+)/)?.[1] || ''}
-                          title={course.title}
                           onDownload={() => {
                             const fileId = course.driveUrl.match(/\/d\/([a-zA-Z0-9-_]+)/)?.[1];
                             if (fileId) {

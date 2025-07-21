@@ -5,11 +5,10 @@ import { Play, Pause, Download, SkipBack, SkipForward } from 'lucide-react';
 
 interface AudioPlayerProps {
   fileId: string;
-  title: string;
   onDownload: () => void;
 }
 
-export default function AudioPlayer({ fileId, title, onDownload }: AudioPlayerProps) {
+export default function AudioPlayer({ fileId, onDownload }: AudioPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -79,52 +78,56 @@ export default function AudioPlayer({ fileId, title, onDownload }: AudioPlayerPr
       <audio ref={audioRef} src={audioUrl} preload="metadata" />
       
       <div className="flex items-center gap-2">
-        <button
-          onClick={() => skip(-10)}
-          className="p-1.5 hover:bg-gray-200 rounded-lg transition-colors flex-shrink-0"
-          title="10 שניות אחורה"
-        >
-          <SkipBack className="h-4 w-4" />
-        </button>
-        
-        <button
-          onClick={togglePlayPause}
-          disabled={isLoading}
-          className="p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors disabled:opacity-50 flex-shrink-0"
-        >
-          {isLoading ? (
-            <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-          ) : isPlaying ? (
-            <Pause className="h-4 w-4" />
-          ) : (
-            <Play className="h-4 w-4 mr-0.5" />
-          )}
-        </button>
-        
-        <button
-          onClick={() => skip(10)}
-          className="p-1.5 hover:bg-gray-200 rounded-lg transition-colors flex-shrink-0"
-          title="10 שניות קדימה"
-        >
-          <SkipForward className="h-4 w-4" />
-        </button>
+        <div className="max-w-[200px] mr-2">
+          <input
+            type="range"
+            min="0"
+            max={duration || 0}
+            value={currentTime}
+            onChange={handleSeek}
+            className="w-full h-1 bg-gray-300 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer"
+          />
+        </div>
 
         <span className="text-xs text-gray-500 w-10 text-center flex-shrink-0">{formatTime(currentTime)}</span>
-        
-        <input
-          type="range"
-          min="0"
-          max={duration || 0}
-          value={currentTime}
-          onChange={handleSeek}
-          className="flex-1 h-1 bg-gray-300 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer"
-        />
-        
+        <span className="text-xs text-gray-500">/</span>
         <span className="text-xs text-gray-500 w-10 text-center flex-shrink-0">{formatTime(duration)}</span>
+
+        <div className="flex items-center gap-1 ml-2">
+          <button
+            onClick={() => skip(-10)}
+            className="p-1.5 hover:bg-gray-200 rounded-lg transition-colors flex-shrink-0"
+            title="10 שניות אחורה"
+          >
+            <SkipBack className="h-4 w-4" />
+          </button>
+          
+          <button
+            onClick={togglePlayPause}
+            disabled={isLoading}
+            className="p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors disabled:opacity-50 flex-shrink-0"
+          >
+            {isLoading ? (
+              <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+            ) : isPlaying ? (
+              <Pause className="h-4 w-4" />
+            ) : (
+              <Play className="h-4 w-4 mr-0.5" />
+            )}
+          </button>
+          
+          <button
+            onClick={() => skip(10)}
+            className="p-1.5 hover:bg-gray-200 rounded-lg transition-colors flex-shrink-0"
+            title="10 שניות קדימה"
+          >
+            <SkipForward className="h-4 w-4" />
+          </button>
+        </div>
 
         <button
           onClick={onDownload}
-          className="p-1.5 text-green-600 hover:bg-green-50 rounded-lg transition-colors flex-shrink-0"
+          className="p-1.5 text-green-600 hover:bg-green-50 rounded-lg transition-colors flex-shrink-0 ml-auto"
           title="הורד"
         >
           <Download className="h-4 w-4" />

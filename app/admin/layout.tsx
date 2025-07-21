@@ -35,6 +35,7 @@ export default function AdminLayout({
     { href: '/admin/qa', label: 'מאמרים', icon: FileText },
     { href: '/admin/distributors', label: 'מפיצים', icon: Users },
     { href: '/admin/rabbis', label: 'רבנים', icon: UserSquare2 },
+    { href: '/admin/courses', label: 'שיעורים', icon: Video },
   ];
 
   return (
