@@ -57,6 +57,13 @@ const Header = () => {
               הורדות
               </Link>
               <Link 
+                href="/cours" 
+                className="text-burgundy-700 hover:text-burgundy-500 text-[17.5px] py-2 block lg:inline-block"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                שיעורים אודיו
+              </Link>
+              <Link 
                 href="/rabbis" 
                 className="text-burgundy-700 hover:text-burgundy-500 text-[17.5px] py-2 block lg:inline-block"
                 onClick={() => setIsMenuOpen(false)}

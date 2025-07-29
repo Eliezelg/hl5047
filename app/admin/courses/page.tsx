@@ -23,8 +23,8 @@ export default function AdminCoursesPage() {
   const router = useRouter();
 
   useEffect(() => {
-    // Vérifier l'authentification
-    const isAuthenticated = document.cookie.includes('admin-authenticated=true');
+    // בדיקת אימות
+    const isAuthenticated = document.cookie.includes('admin_auth=');
     if (!isAuthenticated) {
       router.push('/login');
       return;
@@ -41,7 +41,7 @@ export default function AdminCoursesPage() {
       if (Array.isArray(data)) {
         setCourses(data);
         
-        // Grouper par dossier
+        // קבץ לפי תיקיה
         const grouped = data.reduce((acc: Record<string, Course[]>, course: Course) => {
           if (!acc[course.folder]) {
             acc[course.folder] = [];
@@ -67,22 +67,22 @@ export default function AdminCoursesPage() {
       const result = await response.json();
       
       if (result.success) {
-        setSyncResult(`Synchronisation réussie! ${result.coursesAdded} cours ajoutés, ${result.coursesUpdated} cours mis à jour.`);
-        // Recharger les cours
+        setSyncResult(`הסנכרון הצליח! ${result.coursesAdded} שיעורים נוספו, ${result.coursesUpdated} שיעורים עודכנו.`);
+        // טען מחדש את השיעורים
         await fetchCourses();
       } else {
-        setSyncResult(`Erreur: ${result.error || 'Échec de la synchronisation'}`);
+        setSyncResult(`שגיאה: ${result.error || 'הסנכרון נכשל'}`);
       }
     } catch (error) {
       console.error('Error syncing with Drive:', error);
-      setSyncResult('Erreur lors de la synchronisation');
+      setSyncResult('שגיאה בעת הסנכרון');
     } finally {
       setSyncing(false);
     }
   };
 
   const deleteCourse = async (id: string) => {
-    if (!confirm('Êtes-vous sûr de vouloir supprimer ce cours ?')) return;
+    if (!confirm('האם אתה בטוח שברצונך למחוק שיעור זה?')) return;
     
     try {
       const response = await fetch(`/api/courses/${id}`, {
@@ -100,7 +100,7 @@ export default function AdminCoursesPage() {
   if (loading) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <div className="text-center">Chargement...</div>
+        <div className="text-center">טוען...</div>
       </div>
     );
   }
@@ -108,26 +108,26 @@ export default function AdminCoursesPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">Gestion des Cours</h1>
+        <h1 className="text-3xl font-bold">ניהול שיעורים</h1>
         <button
           onClick={syncWithDrive}
           disabled={syncing}
           className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
         >
           <RefreshCw className={`h-5 w-5 ${syncing ? 'animate-spin' : ''}`} />
-          <span>{syncing ? 'Synchronisation...' : 'Synchroniser avec Google Drive'}</span>
+          <span>{syncing ? 'מסנכרן...' : 'סנכרן עם Google Drive'}</span>
         </button>
       </div>
 
       {syncResult && (
-        <div className={`mb-4 p-4 rounded-lg ${syncResult.includes('Erreur') ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
+        <div className={`mb-4 p-4 rounded-lg ${syncResult.includes('שגיאה') ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
           {syncResult}
         </div>
       )}
 
       <div className="bg-white rounded-lg shadow-md p-6">
         <div className="mb-4 text-sm text-gray-600">
-          Total: {courses.length} cours dans {Object.keys(groupedCourses).length} dossiers
+          סה"כ: {courses.length} שיעורים ב-{Object.keys(groupedCourses).length} תיקיות
         </div>
 
         <div className="space-y-6">
@@ -138,7 +138,7 @@ export default function AdminCoursesPage() {
                 <div className="flex items-center gap-2 mb-3">
                   <Folder className="h-5 w-5 text-blue-600" />
                   <h2 className="text-lg font-semibold">{folder}</h2>
-                  <span className="text-sm text-gray-500">({folderCourses.length} cours)</span>
+                  <span className="text-sm text-gray-500">({folderCourses.length} שיעורים)</span>
                 </div>
 
                 <div className="space-y-2">
@@ -154,7 +154,7 @@ export default function AdminCoursesPage() {
                           <div className="flex-1">
                             <h3 className="font-medium">{course.title}</h3>
                             {course.duration && (
-                              <span className="text-sm text-gray-500">Durée: {course.duration}</span>
+                              <span className="text-sm text-gray-500">משך: {course.duration}</span>
                             )}
                           </div>
                         </div>
@@ -162,7 +162,7 @@ export default function AdminCoursesPage() {
                         <button
                           onClick={() => deleteCourse(course.id)}
                           className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                          title="Supprimer"
+                          title="מחק"
                         >
                           <Trash2 className="h-4 w-4" />
                         </button>
