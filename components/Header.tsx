@@ -39,7 +39,7 @@ const Header = () => {
                 className="text-burgundy-700 hover:text-burgundy-500 text-[17.5px] py-2 block lg:inline-block"
                 onClick={() => setIsMenuOpen(false)}
               >
-                שיעורי הרב ברחבי הארץ
+                שיעורי הרב
               </Link>
 
               <Link 
@@ -61,7 +61,7 @@ const Header = () => {
                 className="text-burgundy-700 hover:text-burgundy-500 text-[17.5px] py-2 block lg:inline-block"
                 onClick={() => setIsMenuOpen(false)}
               >
-                שיעורים אודיו
+                שיעורי אודיו
               </Link>
               <Link 
                 href="/rabbis" 
