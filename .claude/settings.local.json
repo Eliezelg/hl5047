@@ -22,7 +22,8 @@
       "Bash(git rm:*)",
       "Bash(pkill:*)",
       "Bash(true)",
-      "Bash(psql:*)"
+      "Bash(psql:*)",
+      "Bash(mv:*)"
     ],
     "deny": []
   }

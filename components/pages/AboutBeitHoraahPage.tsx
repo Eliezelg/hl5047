@@ -26,7 +26,7 @@ const AboutBeitHoraahPage: React.FC = () => {
                   מציע מענה הלכתי מקיף ומקצועי 24/6
                 </p>
                 <p>
-                  צוות של למעלה מ-80 מורי הוראה מומחים עומד לרשותך בכל שאלה הלכתית 
+                  צוות של למעלה מ-100 מורי הוראה מומחים עומד לרשותך בכל שאלה הלכתית 
                   בתחומי אורח חיים, יורה דעה, וחושן משפט.
                 </p>
 
@@ -101,6 +101,38 @@ const AboutBeitHoraahPage: React.FC = () => {
                     </div>
                   </div>
                 </div>
+
+                <div className="bg-primary-50 p-6 rounded-lg mt-6">
+                  <h3 className="text-xl font-bold mb-4">צוות בית ההוראה:</h3>
+                  <ul className="list-none space-y-3">
+                    <li className="flex items-start gap-2">
+                      <span className="text-accent-gold-400 font-bold ml-2">•</span>
+                      <span>
+                        <strong>מנכ"ל:</strong> הרב אייל בן זיקרי
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-accent-gold-400 font-bold ml-2">•</span>
+                      <span>
+                        <strong>מנהל מוקד טלפוני:</strong> הרב אלעזר לוי
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-accent-gold-400 font-bold ml-2">•</span>
+                      <span>
+                        <strong>צוות דיגיטל:</strong> הרב אלעזר אלגרבלי ור' שרון שבו
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-accent-gold-400 font-bold ml-2">•</span>
+                      <span>
+                        <strong>משרד:</strong> ר' רותם ידגר
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+
+                
               </div>
             </div>
           </div>

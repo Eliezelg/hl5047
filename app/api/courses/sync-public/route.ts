@@ -39,12 +39,17 @@ export async function GET() {
     
     let coursesAdded = 0;
     let coursesUpdated = 0;
+    let coursesDeleted = 0;
+    
+    // Créer un Set des URLs actuelles sur Drive
+    const currentDriveUrls = new Set<string>();
     
     // Synchroniser les cours
     for (const folder of driveData.folders) {
       let order = 0;
       
       for (const file of folder.files) {
+        currentDriveUrls.add(file.webViewLink);
         const existingCourse = existingUrlsMap.get(file.webViewLink);
         
         if (existingCourse) {
@@ -69,10 +74,19 @@ export async function GET() {
       }
     }
     
+    // Supprimer les cours qui n'existent plus sur Drive
+    for (const [url, course] of existingUrlsMap) {
+      if (!currentDriveUrls.has(url)) {
+        await courseService.deleteCourse(course.id);
+        coursesDeleted++;
+      }
+    }
+    
     return NextResponse.json({
       success: true,
       coursesAdded,
       coursesUpdated,
+      coursesDeleted,
       totalFolders: driveData.folders.length,
       totalFiles: driveData.folders.reduce((sum, f) => sum + f.files.length, 0),
     });

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { RefreshCw, Music, Folder, Trash2 } from 'lucide-react';
+import { RefreshCw, Music, Folder, Trash2, AlertTriangle } from 'lucide-react';
 
 interface Course {
   id: string;
@@ -20,6 +20,7 @@ export default function AdminCoursesPage() {
   const [syncing, setSyncing] = useState(false);
   const [groupedCourses, setGroupedCourses] = useState<Record<string, Course[]>>({});
   const [syncResult, setSyncResult] = useState<string | null>(null);
+  const [deleteAllConfirm, setDeleteAllConfirm] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -67,9 +68,12 @@ export default function AdminCoursesPage() {
       const result = await response.json();
       
       if (result.success) {
-        setSyncResult(`הסנכרון הצליח! ${result.coursesAdded} שיעורים נוספו, ${result.coursesUpdated} שיעורים עודכנו.`);
+        setSyncResult(`הסנכרון הצליח! ${result.coursesAdded} שיעורים נוספו, ${result.coursesUpdated} שיעורים עודכנו, ${result.coursesDeleted} שיעורים נמחקו.`);
         // טען מחדש את השיעורים
         await fetchCourses();
+        // נקה את הקאש בצד הלקוח
+        localStorage.removeItem('courses_cache');
+        localStorage.removeItem('courses_cache_timestamp');
       } else {
         setSyncResult(`שגיאה: ${result.error || 'הסנכרון נכשל'}`);
       }
@@ -97,6 +101,29 @@ export default function AdminCoursesPage() {
     }
   };
 
+  const deleteAllCourses = async () => {
+    setDeleteAllConfirm(false);
+    setSyncResult(null);
+    
+    try {
+      // מחק את כל השיעורים
+      for (const course of courses) {
+        await fetch(`/api/courses/${course.id}`, { method: 'DELETE' });
+      }
+      
+      setSyncResult('כל השיעורים נמחקו בהצלחה. כעת אתה יכול לסנכרן מחדש מ-Google Drive.');
+      setCourses([]);
+      setGroupedCourses({});
+      
+      // נקה את הקאש
+      localStorage.removeItem('courses_cache');
+      localStorage.removeItem('courses_cache_timestamp');
+    } catch (error) {
+      console.error('Error deleting all courses:', error);
+      setSyncResult('שגיאה במחיקת השיעורים');
+    }
+  };
+
   if (loading) {
     return (
       <div className="container mx-auto px-4 py-8">
@@ -109,19 +136,51 @@ export default function AdminCoursesPage() {
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">ניהול שיעורים</h1>
-        <button
-          onClick={syncWithDrive}
-          disabled={syncing}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-        >
-          <RefreshCw className={`h-5 w-5 ${syncing ? 'animate-spin' : ''}`} />
-          <span>{syncing ? 'מסנכרן...' : 'סנכרן עם Google Drive'}</span>
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={syncWithDrive}
+            disabled={syncing}
+            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+          >
+            <RefreshCw className={`h-5 w-5 ${syncing ? 'animate-spin' : ''}`} />
+            <span>{syncing ? 'מסנכרן...' : 'סנכרן עם Google Drive'}</span>
+          </button>
+          {courses.length > 0 && (
+            <button
+              onClick={() => setDeleteAllConfirm(true)}
+              className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+            >
+              <AlertTriangle className="h-5 w-5" />
+              <span>מחק הכל וסנכרן מחדש</span>
+            </button>
+          )}
+        </div>
       </div>
 
       {syncResult && (
         <div className={`mb-4 p-4 rounded-lg ${syncResult.includes('שגיאה') ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
           {syncResult}
+        </div>
+      )}
+
+      {deleteAllConfirm && (
+        <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+          <p className="text-red-700 font-semibold mb-3">אזהרה: פעולה זו תמחק את כל השיעורים!</p>
+          <p className="text-red-600 mb-4">האם אתה בטוח שברצונך למחוק את כל השיעורים ({courses.length} שיעורים)? פעולה זו אינה ניתנת לביטול.</p>
+          <div className="flex gap-2">
+            <button
+              onClick={deleteAllCourses}
+              className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+            >
+              כן, מחק הכל
+            </button>
+            <button
+              onClick={() => setDeleteAllConfirm(false)}
+              className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors"
+            >
+              ביטול
+            </button>
+          </div>
         </div>
       )}
 

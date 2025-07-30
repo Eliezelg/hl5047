@@ -50,6 +50,13 @@ export class SimpleGoogleDriveService {
       // Accepter TOUS les fichiers qui ne sont pas des dossiers
       const rootFiles = items.filter(item => item.mimeType !== 'application/vnd.google-apps.folder');
       
+      console.log('=== ALL FOLDERS FOUND ===');
+      console.log('Total folders:', folders.length);
+      folders.forEach(folder => {
+        console.log(`- ${folder.name} (ID: ${folder.id})`);
+      });
+      console.log('========================');
+      
       console.log('Root files found:', rootFiles.length);
       console.log('File types:', rootFiles.map(f => ({ name: f.name, mimeType: f.mimeType })));
 
@@ -59,6 +66,7 @@ export class SimpleGoogleDriveService {
 
       // Récupérer les fichiers de chaque sous-dossier
       for (const folder of folders) {
+        console.log(`Processing folder: ${folder.name} (ID: ${folder.id})`);
         const folderFiles = await this.listPublicFolderContents(folder.id);
         
         // Vérifier s'il y a des sous-dossiers
@@ -72,12 +80,33 @@ export class SimpleGoogleDriveService {
           for (const subFolder of subFolders) {
             const subFolderFiles = await this.listPublicFolderContents(subFolder.id);
             const subCourseFiles = subFolderFiles.filter(file => file.mimeType !== 'application/vnd.google-apps.folder');
+            const subSubFolders = subFolderFiles.filter(file => file.mimeType === 'application/vnd.google-apps.folder');
             
+            // Si le sous-dossier contient des fichiers, l'ajouter
             if (subCourseFiles.length > 0) {
               result.folders.push({
                 name: `${folder.name} > ${subFolder.name}`,
                 files: subCourseFiles,
               });
+            }
+            
+            // Si le sous-dossier contient des sous-sous-dossiers (3ème niveau), les traiter aussi
+            if (subSubFolders.length > 0) {
+              console.log(`Sub-folder ${subFolder.name} has ${subSubFolders.length} sub-sub-folders`);
+              for (const subSubFolder of subSubFolders) {
+                console.log(`Processing sub-sub-folder: ${subSubFolder.name} (ID: ${subSubFolder.id})`);
+                const subSubFolderFiles = await this.listPublicFolderContents(subSubFolder.id);
+                const courseFiles = subSubFolderFiles.filter(file => file.mimeType !== 'application/vnd.google-apps.folder');
+                
+                console.log(`Found ${courseFiles.length} files in ${subSubFolder.name}`);
+                
+                if (courseFiles.length > 0) {
+                  result.folders.push({
+                    name: `${folder.name} > ${subFolder.name} > ${subSubFolder.name}`,
+                    files: courseFiles,
+                  });
+                }
+              }
             }
           }
         }
