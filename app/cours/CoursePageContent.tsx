@@ -218,16 +218,17 @@ export default function CoursePageContent() {
   };
 
   const renderFile = (course: Course) => {
-    // Vérifier tous les formats audio courants
-    const audioFormats = ['.mp3', '.aac', '.m4a', '.wav', '.ogg', '.wma', '.flac', '.opus'];
     const lowerUrl = course.driveUrl.toLowerCase();
     const lowerTitle = course.title.toLowerCase();
     
+    // Vérifier si c'est un PDF
+    const isPDF = lowerUrl.includes('.pdf') || lowerTitle.includes('.pdf');
+    
+    // Vérifier les formats audio pour l'icône
+    const audioFormats = ['.mp3', '.aac', '.m4a', '.wav', '.ogg', '.wma', '.flac', '.opus'];
     const isAudio = audioFormats.some(format => 
       lowerUrl.includes(format) || lowerTitle.includes(format)
     ) || lowerUrl.includes('audio');
-    
-    const isPDF = lowerUrl.includes('.pdf') || lowerTitle.includes('.pdf');
     
     const fileId = course.driveUrl.match(/\/d\/([a-zA-Z0-9-_]+)/)?.[1] || '';
     
@@ -236,6 +237,8 @@ export default function CoursePageContent() {
         <div className="flex items-center gap-3 min-w-0">
           {isAudio ? (
             <Music className="h-4 w-4 text-gray-400 flex-shrink-0" />
+          ) : isPDF ? (
+            <FileText className="h-4 w-4 text-gray-400 flex-shrink-0" />
           ) : (
             <FileText className="h-4 w-4 text-gray-400 flex-shrink-0" />
           )}
@@ -252,12 +255,8 @@ export default function CoursePageContent() {
           </div>
         </div>
         <div className="w-full sm:w-auto">
-          {isAudio ? (
-            <AudioPlayer
-              fileId={fileId}
-              downloadUrl={fileId ? `/api/courses/download/${fileId}` : undefined}
-            />
-          ) : (
+          {isPDF ? (
+            // Pour les PDF : seulement le bouton de téléchargement
             <a
               href={fileId ? `/api/courses/download/${fileId}` : '#'}
               download
@@ -266,6 +265,12 @@ export default function CoursePageContent() {
               <Download className="h-4 w-4" />
               <span>הורד</span>
             </a>
+          ) : (
+            // Pour tous les autres fichiers : lecteur audio/vidéo + téléchargement
+            <AudioPlayer
+              fileId={fileId}
+              downloadUrl={fileId ? `/api/courses/download/${fileId}` : undefined}
+            />
           )}
         </div>
       </div>

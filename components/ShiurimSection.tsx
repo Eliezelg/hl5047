@@ -100,37 +100,29 @@ const ShiurimSection = () => {
   useEffect(() => {
     let interval: NodeJS.Timeout;
     
-    // Créer une fonction pour vérifier si l'élément existe
-    const checkAndScroll = () => {
+    // Fonction pour faire défiler vers la droite
+    const autoScroll = () => {
       if (!scrollRef.current || isPaused) return;
       
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      const maxScroll = scrollWidth - clientWidth;
       
-      // Si on arrive au début, aller à la fin
-      if (scrollLeft <= 10) {
-        scrollRef.current.scrollTo({ left: scrollWidth - clientWidth, behavior: 'smooth' });
+      // Si on est à la fin, revenir au début
+      if (scrollLeft >= maxScroll - 10) {
+        scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
       } else {
-        // Défiler vers la gauche
+        // Défiler vers la droite
         scrollRef.current.scrollBy({
-          left: -220,
+          left: 220,
           behavior: 'smooth'
         });
       }
     };
 
-    // Attendre un peu que le DOM soit prêt
+    // Démarrer l'auto-scroll après un court délai
     const timeoutId = setTimeout(() => {
-      // Positionner le carrousel à la fin au démarrage
-      if (scrollRef.current) {
-        const { scrollWidth, clientWidth } = scrollRef.current;
-        scrollRef.current.scrollTo({ left: scrollWidth - clientWidth, behavior: 'auto' });
-      }
-      
-      // Démarrer l'intervalle
-      interval = setInterval(checkAndScroll, 3000);
-      // Premier défilement après 1 seconde
-      checkAndScroll();
-    }, 500);
+      interval = setInterval(autoScroll, 4000);
+    }, 1000);
 
     return () => {
       clearTimeout(timeoutId);
