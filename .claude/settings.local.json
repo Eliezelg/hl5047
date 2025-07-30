@@ -23,7 +23,9 @@
       "Bash(pkill:*)",
       "Bash(true)",
       "Bash(psql:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "WebFetch(domain:drive.google.com)",
+      "Bash(git fetch:*)"
     ],
     "deny": []
   }

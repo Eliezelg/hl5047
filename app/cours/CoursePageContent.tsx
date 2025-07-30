@@ -38,7 +38,7 @@ const folderIcons: Record<string, string> = {
   'שיעורים הלכות ברכות תשע"ז - תשפ"ב': '/shiour/ברכות_דרייב.png',
   'שיעורים הלכות ברכות תשע\'\'ז - תשפ\'\'ב': '/shiour/ברכות_דרייב.png',
   'שיעורים הלכות המועדים': '/shiour/מועדים_דרייב.png',
-  'איסור והיתר': '/shiour/איסור והיתר__דרייב.png',
+  'שיעורים הלכות בשר וחלב': '/shiour/איסור והיתר__דרייב.png',
   'שיעורים הלכות נדה -תשס"ט': '/shiour/נדה__דרייב.png',
   'שיעורים הלכות נדה -תשס\'\'ט': '/shiour/נדה__דרייב.png',
   'שיעורים הלכות בית הכנסת': '/shiour/בית כנסת__דרייב.png',
@@ -58,13 +58,15 @@ const CACHE_TIMESTAMP_KEY = 'courses_cache_timestamp';
 const CACHE_DURATION = 30 * 60 * 1000; // 30 minutes
 
 export default function CoursePageContent() {
+  const searchParams = useSearchParams();
+  const folderParam = searchParams.get('folder');
+  
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
   const [folderStructure, setFolderStructure] = useState<FolderStructure[]>([]);
   const [expandedFolders, setExpandedFolders] = useState<Set<string>>(new Set());
   const [selectedMainFolder, setSelectedMainFolder] = useState<string | null>(null);
-  const searchParams = useSearchParams();
 
   const buildFolderStructure = (courses: Course[]): FolderStructure[] => {
     const structure: { [key: string]: FolderStructure } = {};
@@ -118,7 +120,6 @@ export default function CoursePageContent() {
           subSubFolder = {
             name: parts[2],
             path: course.folder,
-            subFolders: [],
             files: []
           };
           subFolder.subFolders!.push(subSubFolder);
@@ -127,118 +128,84 @@ export default function CoursePageContent() {
       }
     });
     
-    // Convertir en tableau et trier
+    // Trier les structures
+    Object.values(structure).forEach(folder => {
+      sortFolder(folder);
+    });
+    
     return Object.values(structure).sort((a, b) => a.name.localeCompare(b.name, 'he'));
   };
 
-  const processCourses = (data: Course[]) => {
-    setCourses(data);
-    const structure = buildFolderStructure(data);
-    setFolderStructure(structure);
+  const sortFolder = (folder: FolderStructure) => {
+    // Trier les sous-dossiers
+    if (folder.subFolders) {
+      folder.subFolders.sort((a, b) => {
+        const getYear = (name: string) => {
+          const match = name.match(/תש[פעסנמלכיטחזוהדגבא]['״]{0,2}[א-ת]/);
+          return match ? match[0] : name;
+        };
+        return getYear(a.name).localeCompare(getYear(b.name), 'he');
+      });
+      
+      // Récursivement trier les sous-dossiers
+      folder.subFolders.forEach(subFolder => sortFolder(subFolder));
+    }
+    
+    // Trier les fichiers par titre
+    if (folder.files) {
+      folder.files.sort((a, b) => {
+        // Extraire les numéros du titre
+        const getNumber = (title: string) => {
+          const match = title.match(/\d+/);
+          return match ? parseInt(match[0]) : 0;
+        };
+        
+        const numA = getNumber(a.title);
+        const numB = getNumber(b.title);
+        
+        if (numA !== numB) {
+          return numA - numB;
+        }
+        
+        return a.title.localeCompare(b.title, 'he');
+      });
+    }
   };
 
   const fetchCourses = async () => {
     try {
-      // D'abord vérifier le cache local
-      if (typeof window !== 'undefined') {
-        const cachedData = localStorage.getItem(CACHE_KEY);
-        const cachedTimestamp = localStorage.getItem(CACHE_TIMESTAMP_KEY);
+      // Vérifier le cache
+      const cachedData = localStorage.getItem(CACHE_KEY);
+      const cachedTimestamp = localStorage.getItem(CACHE_TIMESTAMP_KEY);
+      
+      if (cachedData && cachedTimestamp) {
+        const timestamp = parseInt(cachedTimestamp);
+        const now = Date.now();
         
-        if (cachedData && cachedTimestamp) {
-          const timestamp = parseInt(cachedTimestamp);
-          const now = Date.now();
-          
-          // Si le cache est encore valide
-          if (now - timestamp < CACHE_DURATION) {
-            const data = JSON.parse(cachedData);
-            processCourses(data);
-            setLoading(false);
-            return;
-          }
+        if (now - timestamp < CACHE_DURATION) {
+          const data = JSON.parse(cachedData);
+          setCourses(data);
+          setFolderStructure(buildFolderStructure(data));
+          setLoading(false);
+          return;
         }
       }
       
-      // Sinon, récupérer depuis l'API
       const response = await fetch('/api/courses');
       const data = await response.json();
       
-      processCourses(data);
-      
       // Mettre en cache
-      if (typeof window !== 'undefined') {
-        localStorage.setItem(CACHE_KEY, JSON.stringify(data));
-        localStorage.setItem(CACHE_TIMESTAMP_KEY, Date.now().toString());
-      }
+      localStorage.setItem(CACHE_KEY, JSON.stringify(data));
+      localStorage.setItem(CACHE_TIMESTAMP_KEY, Date.now().toString());
+      
+      setCourses(data);
+      setFolderStructure(buildFolderStructure(data));
     } catch (error) {
       console.error('Erreur lors du chargement des cours:', error);
-      
-      // En cas d'erreur, essayer d'utiliser le cache même s'il est expiré
-      if (typeof window !== 'undefined') {
-        const cachedData = localStorage.getItem(CACHE_KEY);
-        if (cachedData) {
-          const data = JSON.parse(cachedData);
-          processCourses(data);
-        }
-      }
     } finally {
       setLoading(false);
     }
   };
-
-  const syncWithDrive = async () => {
-    try {
-      setSyncing(true);
-      
-      // Appeler l'API de synchronisation
-      const response = await fetch('/api/courses/sync-public', {
-        method: 'POST'
-      });
-      
-      if (!response.ok) {
-        throw new Error('Erreur lors de la synchronisation');
-      }
-      
-      // Vider le cache
-      if (typeof window !== 'undefined') {
-        localStorage.removeItem(CACHE_KEY);
-        localStorage.removeItem(CACHE_TIMESTAMP_KEY);
-      }
-      
-      // Recharger les cours
-      await fetchCourses();
-    } catch (error) {
-      console.error('Erreur lors de la synchronisation:', error);
-      alert('Erreur lors de la synchronisation avec Google Drive');
-    } finally {
-      setSyncing(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchCourses();
-    
-    // Synchronisation automatique toutes les 24h
-    const now = new Date();
-    const lastSyncStr = localStorage.getItem('last_sync_date');
-    const lastSyncDate = lastSyncStr ? new Date(lastSyncStr) : null;
-    
-    // Si jamais synchronisé ou dernière sync > 24h
-    if (!lastSyncDate || now.getTime() - lastSyncDate.getTime() > 24 * 60 * 60 * 1000) {
-      // Et si c'est entre 3h et 4h du matin
-      if (!lastSyncDate || (now.getHours() === 3)) {
-        syncWithDrive().then(() => {
-          localStorage.setItem('last_sync_date', now.toISOString());
-        });
-      }
-    }
-
-    // Gérer les paramètres de recherche
-    const folderParam = searchParams.get('folder');
-    if (folderParam) {
-      setSelectedMainFolder(folderParam);
-      setExpandedFolders(new Set([folderParam]));
-    }
-  }, [searchParams]);
 
   const toggleFolder = (path: string) => {
     const newExpanded = new Set(expandedFolders);
@@ -250,85 +217,125 @@ export default function CoursePageContent() {
     setExpandedFolders(newExpanded);
   };
 
-  const selectMainFolder = (folderName: string | null) => {
-    setSelectedMainFolder(folderName);
-    if (folderName) {
-      setExpandedFolders(new Set([folderName]));
-    } else {
-      setExpandedFolders(new Set());
-    }
-  };
-
-  const getCourseDuration = (url: string): string => {
-    const course = courses.find(c => c.driveUrl === url);
-    return course?.duration || '';
-  };
-
-  const renderFolder = (folder: FolderStructure, level: number = 0) => {
-    const isExpanded = expandedFolders.has(folder.path);
-    const hasContent = (folder.files && folder.files.length > 0) || (folder.subFolders && folder.subFolders.length > 0);
-    const folderIcon = folderIcons[folder.name] || null;
+  const renderFile = (course: Course) => {
+    // Vérifier tous les formats audio courants
+    const audioFormats = ['.mp3', '.aac', '.m4a', '.wav', '.ogg', '.wma', '.flac', '.opus'];
+    const lowerUrl = course.driveUrl.toLowerCase();
+    const lowerTitle = course.title.toLowerCase();
+    
+    const isAudio = audioFormats.some(format => 
+      lowerUrl.includes(format) || lowerTitle.includes(format)
+    ) || lowerUrl.includes('audio');
+    
+    const isPDF = lowerUrl.includes('.pdf') || lowerTitle.includes('.pdf');
+    
+    const fileId = course.driveUrl.match(/\/d\/([a-zA-Z0-9-_]+)/)?.[1] || '';
     
     return (
-      <div key={folder.path} className={`${level > 0 ? 'mr-4' : ''}`}>
-        <div
-          className={`flex items-center p-2 rounded-lg cursor-pointer transition-colors ${
-            level === 0 ? 'hover:bg-primary-50 font-semibold' : 'hover:bg-gray-50'
-          }`}
-          onClick={() => hasContent && toggleFolder(folder.path)}
-        >
-          {hasContent && (
-            <div className="ml-2">
-              {isExpanded ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-3 hover:bg-gray-50 rounded">
+        <div className="flex items-center gap-3 min-w-0">
+          {isAudio ? (
+            <Music className="h-4 w-4 text-gray-400 flex-shrink-0" />
+          ) : (
+            <FileText className="h-4 w-4 text-gray-400 flex-shrink-0" />
+          )}
+          <div className="min-w-0">
+            <div className="font-medium text-gray-900 truncate" title={course.title}>
+              {course.title}
             </div>
-          )}
-          {folderIcon && (
-            <img 
-              src={folderIcon} 
-              alt={folder.name} 
-              className="w-8 h-8 ml-2 ml-2 object-contain"
+            {course.duration && (
+              <div className="text-sm text-gray-500 flex items-center gap-1">
+                <Clock className="h-3 w-3" />
+                {course.duration}
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="w-full sm:w-auto">
+          {isAudio ? (
+            <AudioPlayer
+              fileId={fileId}
+              downloadUrl={fileId ? `/api/courses/download/${fileId}` : undefined}
             />
-          )}
-          {isExpanded ? <FolderOpen className={`w-5 h-5 text-primary-600 ${!folderIcon ? 'ml-2' : 'ml-1'}`} /> : <Folder className={`w-5 h-5 text-primary-600 ${!folderIcon ? 'ml-2' : 'ml-1'}`} />}
-          <span className={`mr-2 ${level === 0 ? 'text-primary-800' : ''}`}>{folder.name}</span>
-          {folder.files && folder.files.length > 0 && (
-            <span className="text-sm text-gray-500">({folder.files.length})</span>
+          ) : (
+            <a
+              href={fileId ? `/api/courses/download/${fileId}` : '#'}
+              download
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors inline-block cursor-pointer"
+            >
+              <Download className="h-4 w-4" />
+              <span>הורד</span>
+            </a>
           )}
         </div>
+      </div>
+    );
+  };
+
+  const renderFolder = (folder: FolderStructure, level = 0): React.ReactNode => {
+    const isExpanded = expandedFolders.has(folder.path);
+    const hasContent = (folder.files?.length || 0) > 0 || (folder.subFolders?.length || 0) > 0;
+    const folderIcon = folderIcons[folder.name] || null;
+
+    if (level === 0 && selectedMainFolder && folder.name !== selectedMainFolder) {
+      return null;
+    }
+
+    return (
+      <div key={folder.path} className={level > 0 ? 'ml-6' : ''}>
+        {/* Afficher le dossier principal avec son icône */}
+        {level === 0 && hasContent && (
+          <div className="flex items-center gap-3 mb-4">
+            {folderIcon && (
+              <img 
+                src={folderIcon} 
+                alt={folder.name} 
+                className="h-12 w-12 object-contain"
+              />
+            )}
+            {folder.subFolders && folder.subFolders.length > 0 && (
+              <div className="text-sm text-gray-500">
+                {folder.subFolders.length} תיקיות
+              </div>
+            )}
+          </div>
+        )}
         
-        {isExpanded && (
-          <div className="mr-4">
-            {/* Sous-dossiers */}
-            {folder.subFolders && folder.subFolders.map(subFolder => renderFolder(subFolder, level + 1))}
-            
-            {/* Fichiers */}
-            {folder.files && folder.files.map((course) => (
-              <div key={course.id} className="flex items-center justify-between p-2 hover:bg-gray-50 rounded-lg">
-                <div className="flex items-center flex-1">
-                  <Music className="w-4 h-4 text-gray-400 ml-2" />
-                  <span className="mr-2 text-sm line-clamp-1">{course.title}</span>
-                  {course.duration && (
-                    <span className="text-xs text-gray-500 flex items-center">
-                      <Clock className="w-3 h-3 ml-1" />
-                      {course.duration}
-                    </span>
-                  )}
-                </div>
-                <div className="flex items-center gap-2">
-                  <AudioPlayer 
-                    fileId={course.id}
-                    downloadUrl={course.driveUrl}
-                  />
-                  <a
-                    href={course.driveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-1 hover:bg-primary-100 rounded transition-colors"
-                    title="הורדה"
-                  >
-                    <Download className="w-4 h-4 text-primary-600" />
-                  </a>
-                </div>
+        {/* Sous-dossiers avec bouton cliquable */}
+        {level > 0 && (
+          <button
+            onClick={() => toggleFolder(folder.path)}
+            className={`w-full flex items-center gap-2 p-3 rounded-lg hover:bg-gray-50 transition-colors ${
+              isExpanded ? 'bg-gray-50' : ''
+            }`}
+          >
+            {hasContent && (
+              isExpanded ? 
+                <ChevronDown className="h-4 w-4 text-gray-400" /> : 
+                <ChevronRight className="h-4 w-4 text-gray-400" />
+            )}
+            {isExpanded ? (
+              <FolderOpen className="h-5 w-5 text-blue-600" />
+            ) : (
+              <Folder className="h-5 w-5 text-gray-400" />
+            )}
+            <span className={`font-medium ${isExpanded ? 'text-blue-600' : 'text-gray-700'}`}>
+              {folder.name}
+            </span>
+            {folder.files && folder.files.length > 0 && (
+              <span className="text-sm text-gray-500 mr-auto">
+                ({folder.files.length})
+              </span>
+            )}
+          </button>
+        )}
+
+        {(level === 0 || isExpanded) && (
+          <div className={level > 0 ? 'mt-1' : ''}>
+            {folder.subFolders?.map(subFolder => renderFolder(subFolder, level + 1))}
+            {folder.files?.map(file => (
+              <div key={file.id} className={level > 0 ? 'ml-6' : ''}>
+                {renderFile(file)}
               </div>
             ))}
           </div>
@@ -337,89 +344,176 @@ export default function CoursePageContent() {
     );
   };
 
-  const filteredFolders = selectedMainFolder 
-    ? folderStructure.filter(f => f.name === selectedMainFolder)
-    : folderStructure;
+  useEffect(() => {
+    fetchCourses();
+  }, []);
+
+  // Ouvrir le dossier spécifié dans l'URL
+  useEffect(() => {
+    if (folderParam && folderStructure.length > 0) {
+      // Trouver le dossier correspondant
+      const folder = folderStructure.find(f => f.name === folderParam);
+      if (folder) {
+        // Sélectionner le dossier principal
+        setSelectedMainFolder(folder.name);
+        // Ouvrir le dossier
+        const newExpanded = new Set(expandedFolders);
+        newExpanded.add(folder.path);
+        setExpandedFolders(newExpanded);
+      }
+    }
+  }, [folderParam, folderStructure]);
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 py-8">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center py-12">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
-              <p className="mt-4 text-gray-600">טוען שיעורים...</p>
-            </div>
-          </div>
-        </div>
+      <div className="container mx-auto px-4 py-8" dir="rtl">
+        <div className="text-center">טוען שיעורים...</div>
       </div>
     );
   }
 
+  // Générer les données structurées
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "שיעורי הרב אופיר יצחק מלכא - הלכה למעשה",
+    "description": "אוסף שיעורי הלכה בנושאים שונים",
+    "numberOfItems": courses.length,
+    "itemListElement": courses.slice(0, 10).map((course, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "AudioObject",
+        "name": course.title,
+        "description": course.description || course.title,
+        "contentUrl": `/api/courses/stream/${course.id}`,
+        "duration": course.duration || "PT30M",
+        "uploadDate": new Date().toISOString(),
+        "inLanguage": "he"
+      }
+    }))
+  };
+
+  const breadcrumbData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "בית",
+        "item": "https://hl5047.co.il"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "שיעורי הרב",
+        "item": "https://hl5047.co.il/cours"
+      }
+    ]
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="container mx-auto px-4">
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <div className="flex items-center justify-between mb-6">
-            <h1 className="text-3xl font-bold text-primary-800">שיעורי הרב</h1>
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-600">
-                {courses.length} שיעורים
-              </span>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
+      />
+      <main className="container mx-auto px-4 py-8" dir="rtl">
+
+
+        <header className="flex flex-col items-center mb-8">
+          <h1 className="text-4xl font-bold text-center mb-4">שיעורי הרב אופיר יצחק מלכא שליט"א</h1>
+          <p className="text-xl text-gray-700 text-center max-w-3xl">
+            ארכיון מקיף של אלפי שיעורי הלכה בכל תחומי החיים היהודיים. 
+            כל השיעורים זמינים להאזנה והורדה בחינם.
+          </p>
+        </header>
+      
+        {/* Menu horizontal des dossiers principaux */}
+        <section className="mb-8 border-b bg-gray-50" aria-label="קטגוריות שיעורים">
+          <h2 className="sr-only">בחר קטגוריית שיעורים</h2>
+          <div className="flex flex-wrap gap-4 p-6 justify-center">
+          {folderStructure.map((folder) => {
+            const icon = folderIcons[folder.name];
+            return (
               <button
-                onClick={syncWithDrive}
-                disabled={syncing}
-                className="flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors disabled:opacity-50"
+                key={folder.name}
+                onClick={() => {
+                  setSelectedMainFolder(
+                    selectedMainFolder === folder.name ? null : folder.name
+                  );
+                  // Ouvrir automatiquement le dossier principal quand on clique sur l'icône
+                  if (folder.name !== selectedMainFolder) {
+                    const newExpanded = new Set(expandedFolders);
+                    newExpanded.add(folder.path);
+                    setExpandedFolders(newExpanded);
+                  }
+                }}
+                className={`flex flex-col items-center gap-2 p-4 text-lg font-medium rounded-lg transition-all transform hover:scale-105 ${
+                  selectedMainFolder === folder.name
+                    ? 'bg-blue-600 text-white shadow-lg'
+                    : 'bg-white text-gray-700 hover:bg-gray-50 shadow-md'
+                }`}
               >
-                <RefreshCw className={`w-4 h-4 ${syncing ? 'animate-spin' : ''}`} />
-                {syncing ? 'מסנכרן...' : 'סנכרון עם Drive'}
+                {icon && (
+                  <img
+                    src={icon}
+                    alt={folder.name}
+                    className="w-20 h-20 object-contain"
+                  />
+                )}
+                <span>{folder.name}</span>
               </button>
+            );
+          })}
+          </div>
+        </section>
+
+        {/* Contenu */}
+        <section className="max-w-4xl mx-auto" aria-label="רשימת שיעורים">
+          {selectedMainFolder && (
+            <div>
+              <h2 className="text-2xl font-bold mb-4 text-gray-800">
+                {selectedMainFolder}
+              </h2>
+              {folderStructure
+                .filter(folder => folder.name === selectedMainFolder)
+                .map(folder => renderFolder(folder))
+              }
             </div>
-          </div>
+          )}
+          
+          {!selectedMainFolder && (
+            <div className="text-center text-gray-500 mt-8">
+              <p className="text-lg">בחר קטגוריה מהתפריט למעלה כדי לראות את השיעורים הזמינים</p>
+              <p className="mt-4 text-base">
+                באתר זה תמצאו אלפי שיעורים בהלכה למעשה בנושאים מגוונים: 
+                הלכות שבת, ברכות, מועדים, בשר וחלב, נדה, בית הכנסת ועוד.
+              </p>
+            </div>
+          )}
+        </section>
 
-          {/* כפתורי סינון */}
-          <div className="flex flex-wrap gap-2 mb-6 p-4 bg-gray-50 rounded-lg">
-            <button
-              onClick={() => selectMainFolder(null)}
-              className={`px-4 py-2 rounded-lg transition-colors ${
-                !selectedMainFolder 
-                  ? 'bg-primary-600 text-white' 
-                  : 'bg-white text-gray-700 hover:bg-gray-100'
-              }`}
-            >
-              כל השיעורים
-            </button>
-            {folderStructure.map(folder => {
-              const folderIcon = folderIcons[folder.name];
-              return (
-                <button
-                  key={folder.name}
-                  onClick={() => selectMainFolder(folder.name)}
-                  className={`px-4 py-2 rounded-lg transition-colors flex items-center gap-2 ${
-                    selectedMainFolder === folder.name 
-                      ? 'bg-primary-600 text-white' 
-                      : 'bg-white text-gray-700 hover:bg-gray-100'
-                  }`}
-                >
-                  {folderIcon && (
-                    <img 
-                      src={folderIcon} 
-                      alt={folder.name} 
-                      className="w-6 h-6 object-contain"
-                    />
-                  )}
-                  {folder.name}
-                </button>
-              );
-            })}
+        {/* SEO Footer */}
+        <footer className="mt-16 pt-8 border-t border-gray-200">
+          <div className="max-w-4xl mx-auto text-center text-gray-600">
+            <h3 className="text-lg font-semibold mb-2">אודות השיעורים</h3>
+            <p className="mb-4">
+              כל השיעורים באתר הוקלטו על ידי הרב אופיר יצחק מלכא שליט"א, 
+              רב בית ההוראה "הלכה למעשה". 
+              השיעורים מועברים מזה שנים רבות לתלמידים רבים ומכסים את כל תחומי ההלכה היומיומית.
+            </p>
+            <p className="text-sm">
+              השיעורים מתעדכנים באופן שוטף | כל השיעורים זמינים להאזנה והורדה בחינם
+            </p>
           </div>
-
-          {/* מבנה תיקיות */}
-          <div className="space-y-1">
-            {filteredFolders.map(folder => renderFolder(folder))}
-          </div>
-        </div>
-      </div>
-    </div>
+        </footer>
+      </main>
+    </>
   );
 }
