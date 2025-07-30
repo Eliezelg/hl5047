@@ -5,10 +5,11 @@ import { Play, Pause, Download, SkipBack, SkipForward } from 'lucide-react';
 
 interface AudioPlayerProps {
   fileId: string;
-  onDownload: () => void;
+  onDownload?: () => void;
+  downloadUrl?: string;
 }
 
-export default function AudioPlayer({ fileId, onDownload }: AudioPlayerProps) {
+export default function AudioPlayer({ fileId, onDownload, downloadUrl }: AudioPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -127,13 +128,24 @@ export default function AudioPlayer({ fileId, onDownload }: AudioPlayerProps) {
           </button>
         </div>
 
-        <button
-          onClick={onDownload}
-          className="p-1.5 text-green-600 hover:bg-green-50 rounded-lg transition-colors flex-shrink-0"
-          title="הורד"
-        >
-          <Download className="h-4 w-4" />
-        </button>
+        {downloadUrl ? (
+          <a
+            href={downloadUrl}
+            download
+            className="p-1.5 text-green-600 hover:bg-green-50 rounded-lg transition-colors flex-shrink-0 inline-block"
+            title="הורד"
+          >
+            <Download className="h-4 w-4" />
+          </a>
+        ) : onDownload ? (
+          <button
+            onClick={onDownload}
+            className="p-1.5 text-green-600 hover:bg-green-50 rounded-lg transition-colors flex-shrink-0"
+            title="הורד"
+          >
+            <Download className="h-4 w-4" />
+          </button>
+        ) : null}
       </div>
     </div>
   );

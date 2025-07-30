@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { ToastProvider } from '@/components/ui/toast';
 import ClientProviders from './ClientProviders';
+import AdPopup from '@/components/AdPopup';
 
 export { metadata } from './layout.server';
 
@@ -52,6 +53,7 @@ export default function RootLayout({
         <ClientProviders>
           <div className="min-h-screen bg-wheat-50 flex flex-col">
             <ToastProvider>
+              <AdPopup />
               <Header />
               <main className="flex-grow">
                 {children}

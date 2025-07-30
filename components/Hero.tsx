@@ -40,10 +40,10 @@ const Hero = () => {
           </h1>
           <div className="animate-on-load flex flex-col sm:flex-row justify-center gap-6 transition-all duration-700 ease-out mt-12">
             <Link
-              href='https://www.youtube.com/channel/UCiT6KgOE1IDJ2XHE23Zk2Cg'
+              href="/cours"
               className="bg-primary-700 text-white px-8 py-4 rounded-xl font-medium hover:bg-primary-800 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-primary-300/50"
             >
-               השיעורים של הרב
+              שיעורי הרב להאזנה ישירה ולהורדה
             </Link>
             <a
               href="/questions"

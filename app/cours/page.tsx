@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Clock, Folder, FolderOpen, RefreshCw, ChevronRight, ChevronDown, Music, FileText, Download } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import { useSearchParams } from 'next/navigation';
 
 const AudioPlayer = dynamic(() => import('@/components/AudioPlayer'), { ssr: false });
 
@@ -37,7 +38,7 @@ const folderIcons: Record<string, string> = {
   'שיעורים הלכות ברכות תשע"ז - תשפ"ב': '/shiour/ברכות_דרייב.png',
   'שיעורים הלכות ברכות תשע\'\'ז - תשפ\'\'ב': '/shiour/ברכות_דרייב.png',
   'שיעורים הלכות המועדים': '/shiour/מועדים_דרייב.png',
-  'איסור והיתר': '/shiour/איסור והיתר__דרייב.png',
+  'שיעורים הלכות בשר וחלב': '/shiour/איסור והיתר__דרייב.png',
   'שיעורים הלכות נדה -תשס"ט': '/shiour/נדה__דרייב.png',
   'שיעורים הלכות נדה -תשס\'\'ט': '/shiour/נדה__דרייב.png',
   'שיעורים הלכות בית הכנסת': '/shiour/בית כנסת__דרייב.png',
@@ -57,6 +58,9 @@ const CACHE_TIMESTAMP_KEY = 'courses_cache_timestamp';
 const CACHE_DURATION = 30 * 60 * 1000; // 30 minutes
 
 export default function CoursesPage() {
+  const searchParams = useSearchParams();
+  const folderParam = searchParams.get('folder');
+  
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
@@ -211,12 +215,16 @@ export default function CoursesPage() {
   };
 
   const renderFile = (course: Course) => {
-    const isAudio = course.driveUrl.includes('.mp3') || 
-                    course.title.toLowerCase().includes('.mp3') ||
-                    course.driveUrl.includes('audio');
+    // Vérifier tous les formats audio courants
+    const audioFormats = ['.mp3', '.aac', '.m4a', '.wav', '.ogg', '.wma', '.flac', '.opus'];
+    const lowerUrl = course.driveUrl.toLowerCase();
+    const lowerTitle = course.title.toLowerCase();
     
-    const isPDF = course.driveUrl.includes('.pdf') || 
-                  course.title.toLowerCase().includes('.pdf');
+    const isAudio = audioFormats.some(format => 
+      lowerUrl.includes(format) || lowerTitle.includes(format)
+    ) || lowerUrl.includes('audio');
+    
+    const isPDF = lowerUrl.includes('.pdf') || lowerTitle.includes('.pdf');
     
     const fileId = course.driveUrl.match(/\/d\/([a-zA-Z0-9-_]+)/)?.[1] || '';
     
@@ -242,24 +250,17 @@ export default function CoursesPage() {
           {isAudio ? (
             <AudioPlayer
               fileId={fileId}
-              onDownload={() => {
-                if (fileId) {
-                  window.open(`/api/courses/download/${fileId}`, '_blank');
-                }
-              }}
+              downloadUrl={fileId ? `/api/courses/download/${fileId}` : undefined}
             />
           ) : (
-            <button
-              onClick={() => {
-                if (fileId) {
-                  window.open(`/api/courses/download/${fileId}`, '_blank');
-                }
-              }}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            <a
+              href={fileId ? `/api/courses/download/${fileId}` : '#'}
+              download
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors inline-block cursor-pointer"
             >
               <Download className="h-4 w-4" />
               <span>הורד</span>
-            </button>
+            </a>
           )}
         </div>
       </div>
@@ -329,6 +330,22 @@ export default function CoursesPage() {
     fetchCourses();
   }, []);
 
+  // Ouvrir le dossier spécifié dans l'URL
+  useEffect(() => {
+    if (folderParam && folderStructure.length > 0) {
+      // Trouver le dossier correspondant
+      const folder = folderStructure.find(f => f.name === folderParam);
+      if (folder) {
+        // Sélectionner le dossier principal
+        setSelectedMainFolder(folder.name);
+        // Ouvrir le dossier
+        const newExpanded = new Set(expandedFolders);
+        newExpanded.add(folder.path);
+        setExpandedFolders(newExpanded);
+      }
+    }
+  }, [folderParam, folderStructure]);
+
   if (loading) {
     return (
       <div className="container mx-auto px-4 py-8" dir="rtl">
@@ -337,15 +354,81 @@ export default function CoursesPage() {
     );
   }
 
+  // Générer les données structurées
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "שיעורי הרב אופיר יצחק מלכא  - הלכה למעשה",
+    "description": "אוסף שיעורי הלכה בנושאים שונים",
+    "numberOfItems": courses.length,
+    "itemListElement": courses.slice(0, 10).map((course, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "AudioObject",
+        "name": course.title,
+        "description": course.description || course.title,
+        "contentUrl": `/api/courses/stream/${course.id}`,
+        "duration": course.duration || "PT30M",
+        "uploadDate": new Date().toISOString(),
+        "inLanguage": "he"
+      }
+    }))
+  };
+
+  const breadcrumbData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "בית",
+        "item": "https://hl5047.co.il"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "שיעורי הרב",
+        "item": "https://hl5047.co.il/cours"
+      }
+    ]
+  };
+
   return (
-    <div className="container mx-auto px-4 py-8" dir="rtl">
-      <div className="flex flex-col items-center mb-8">
-        <h1 className="text-4xl font-bold text-center mb-4">שיעורי הרב</h1>
-      </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
+      />
+      <main className="container mx-auto px-4 py-8" dir="rtl">
+        {/* Breadcrumbs */}
+        <nav aria-label="חיווט דפים" className="mb-6">
+          <ol className="flex items-center gap-2 text-sm text-gray-600">
+            <li>
+              <a href="/" className="hover:text-blue-600 transition-colors">בית</a>
+            </li>
+            <li>/</li>
+            <li className="text-gray-900 font-medium" aria-current="page">שיעורי הרב</li>
+          </ol>
+        </nav>
+
+        <header className="flex flex-col items-center mb-8">
+          <h1 className="text-4xl font-bold text-center mb-4">שיעורי הרב אופיר יצחק מלכא  שליט"א</h1>
+          <p className="text-xl text-gray-700 text-center max-w-3xl">
+            ארכיון מקיף של אלפי שיעורי הלכה בכל תחומי החיים היהודיים. 
+            כל השיעורים זמינים להאזנה והורדה בחינם.
+          </p>
+        </header>
       
-      {/* Menu horizontal des dossiers principaux */}
-      <div className="mb-8 border-b bg-gray-50">
-        <div className="flex flex-wrap gap-4 p-6 justify-center">
+        {/* Menu horizontal des dossiers principaux */}
+        <section className="mb-8 border-b bg-gray-50" aria-label="קטגוריות שיעורים">
+          <h2 className="sr-only">בחר קטגוריית שיעורים</h2>
+          <div className="flex flex-wrap gap-4 p-6 justify-center">
           {folderStructure.map((folder) => {
             const icon = folderIcons[folder.name];
             return (
@@ -379,26 +462,49 @@ export default function CoursesPage() {
               </button>
             );
           })}
-        </div>
-      </div>
+          </div>
+        </section>
 
-      {/* Contenu */}
-      <div className="max-w-4xl mx-auto">
-        {selectedMainFolder && (
-          <div>
-            {folderStructure
-              .filter(folder => folder.name === selectedMainFolder)
-              .map(folder => renderFolder(folder))
-            }
+        {/* Contenu */}
+        <section className="max-w-4xl mx-auto" aria-label="רשימת שיעורים">
+          {selectedMainFolder && (
+            <div>
+              <h2 className="text-2xl font-bold mb-4 text-gray-800">
+                {selectedMainFolder}
+              </h2>
+              {folderStructure
+                .filter(folder => folder.name === selectedMainFolder)
+                .map(folder => renderFolder(folder))
+              }
+            </div>
+          )}
+          
+          {!selectedMainFolder && (
+            <div className="text-center text-gray-500 mt-8">
+              <p className="text-lg">בחר קטגוריה מהתפריט למעלה כדי לראות את השיעורים הזמינים</p>
+              <p className="mt-4 text-base">
+                באתר זה תמצאו אלפי שיעורים בהלכה למעשה בנושאים מגוונים: 
+                הלכות שבת, ברכות, מועדים, בשר וחלב, נדה, בית הכנסת ועוד.
+              </p>
+            </div>
+          )}
+        </section>
+
+        {/* SEO Footer */}
+        <footer className="mt-16 pt-8 border-t border-gray-200">
+          <div className="max-w-4xl mx-auto text-center text-gray-600">
+            <h3 className="text-lg font-semibold mb-2">אודות השיעורים</h3>
+            <p className="mb-4">
+              כל השיעורים באתר הוקלטו על ידי הרב אופיר יצחק מלכא  שליט"א, 
+              רב בית ההוראה "הלכה למעשה" בבני ברק. 
+              השיעורים מועברים מזה שנים רבות לתלמידים רבים ומכסים את כל תחומי ההלכה היומיומית.
+            </p>
+            <p className="text-sm">
+              השיעורים מתעדכנים באופן שוטף | כל השיעורים זמינים להאזנה והורדה בחינם
+            </p>
           </div>
-        )}
-        
-        {!selectedMainFolder && (
-          <div className="text-center text-gray-500 mt-8">
-            בחר תיקייה כדי לראות את השיעורים הזמינים
-          </div>
-        )}
-      </div>
-    </div>
+        </footer>
+      </main>
+    </>
   );
 }
