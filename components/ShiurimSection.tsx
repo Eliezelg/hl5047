@@ -147,36 +147,36 @@ const ShiurimSection = () => {
   };
 
   return (
-    <section className="py-16 bg-gradient-to-b from-primary-50 to-white">
+    <section className="py-8 sm:py-12 md:py-16 bg-gradient-to-b from-primary-50 to-white">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center text-primary-800 mb-12">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-primary-800 mb-8 md:mb-12">
           שיעורי תורה והלכה
         </h2>
         
         <div className="relative">
           <button
             onClick={() => scroll('left')}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-lg rounded-full p-3 transition-all"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-lg rounded-full p-2 md:p-3 transition-all hidden sm:block"
             aria-label="Scroll left"
           >
-            <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 md:w-6 md:h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
           
           <button
             onClick={() => scroll('right')}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-lg rounded-full p-3 transition-all"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-lg rounded-full p-2 md:p-3 transition-all hidden sm:block"
             aria-label="Scroll right"
           >
-            <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 md:w-6 md:h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
 
           <div 
             ref={scrollRef}
-            className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
+            className="flex gap-3 sm:gap-4 md:gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4 px-2 sm:px-0"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -192,7 +192,7 @@ const ShiurimSection = () => {
                 <ItemWrapper
                   key={`${item.title}-${index}`}
                   {...wrapperProps}
-                  className="group flex-shrink-0 block bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 w-[200px]"
+                  className="group flex-shrink-0 block bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 w-[150px] sm:w-[180px] md:w-[200px]"
                 >
                   <div className="aspect-square relative overflow-hidden rounded-t-xl w-full">
                     <img
@@ -201,12 +201,12 @@ const ShiurimSection = () => {
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
-                  <div className="p-3 text-center">
-                    <h3 className="text-sm font-bold text-primary-800 mb-1 line-clamp-2">
+                  <div className="p-2 sm:p-3 text-center">
+                    <h3 className="text-xs sm:text-sm font-bold text-primary-800 mb-1 line-clamp-2">
                       {item.title}
                     </h3>
                     {(item as any).description && (
-                      <p className="text-xs text-primary-600 line-clamp-2">
+                      <p className="text-[10px] sm:text-xs text-primary-600 line-clamp-2">
                         {(item as any).description}
                       </p>
                     )}
