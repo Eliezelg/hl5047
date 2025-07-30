@@ -75,12 +75,12 @@ export async function GET() {
     }
     
     // Supprimer les cours qui n'existent plus sur Drive
-    for (const [url, course] of existingUrlsMap) {
+    Array.from(existingUrlsMap.entries()).forEach(async ([url, course]) => {
       if (!currentDriveUrls.has(url)) {
         await courseService.deleteCourse(course.id);
         coursesDeleted++;
       }
-    }
+    });
     
     return NextResponse.json({
       success: true,

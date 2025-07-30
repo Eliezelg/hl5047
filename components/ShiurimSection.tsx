@@ -182,8 +182,9 @@ const ShiurimSection = () => {
             onMouseLeave={handleMouseLeave}
           >
             {allItems.map((item, index) => {
-              const ItemWrapper = item.isExternal ? 'a' : Link;
-              const wrapperProps = item.isExternal 
+              const isExternal = 'isExternal' in item && item.isExternal;
+              const ItemWrapper = isExternal ? 'a' : Link;
+              const wrapperProps = isExternal 
                 ? { href: item.link, target: "_blank", rel: "noopener noreferrer" }
                 : { href: item.link };
 
@@ -204,9 +205,9 @@ const ShiurimSection = () => {
                     <h3 className="text-sm font-bold text-primary-800 mb-1 line-clamp-2">
                       {item.title}
                     </h3>
-                    {item.description && (
+                    {(item as any).description && (
                       <p className="text-xs text-primary-600 line-clamp-2">
-                        {item.description}
+                        {(item as any).description}
                       </p>
                     )}
                   </div>
