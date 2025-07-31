@@ -142,7 +142,7 @@ const ShiurimSection = () => {
     <section className="py-8 sm:py-12 md:py-16 bg-gradient-to-b from-primary-50 to-white">
       <div className="container mx-auto px-4">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-primary-800 mb-8 md:mb-12">
-          שיעורי תורה והלכה
+          שיעורי הלכה למעשה
         </h2>
         
         <div className="relative">

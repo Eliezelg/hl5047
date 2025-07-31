@@ -2,12 +2,13 @@ export interface Rabbi {
   id: string;
   firstName: string;
   lastName: string;
-  phone: string;
+  phone?: string;
+  email?: string;
   topics: RabbiTopic[];
-  photo: string;
-  address: string;
+  photo?: string;
+  address?: string;
   description?: string;
-  city: string;
+  city?: string;
   languages: string[];
   imageUrl?: string;
 }

@@ -17,6 +17,8 @@ model Rabbi {
   id          String         @id @default(uuid())
   firstName   String
   lastName    String
+  phone       String?
+  email       String?
   topics      String[]
   categories  RabbiCategory[]
   address     String?

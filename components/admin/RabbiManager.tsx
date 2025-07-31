@@ -10,6 +10,8 @@ const LANGUAGES = ['עברית', 'אנגלית', 'צרפתית', 'רוסית'] a
 const defaultRabbi: Partial<Rabbi> = {
   firstName: '',
   lastName: '',
+  phone: '',
+  email: '',
   topics: [],
   languages: [],
   address: '',
@@ -228,6 +230,28 @@ const RabbiManager = () => {
                 className="mt-1 block w-full rounded border-gray-300 shadow-sm"
               />
             </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">טלפון</label>
+              <input
+                type="tel"
+                value={currentRabbi.phone || ''}
+                onChange={(e) => setCurrentRabbi(prev => ({ ...prev, phone: e.target.value }))}
+                className="mt-1 block w-full rounded border-gray-300 shadow-sm"
+                placeholder="050-1234567"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">דוא"ל</label>
+              <input
+                type="email"
+                value={currentRabbi.email || ''}
+                onChange={(e) => setCurrentRabbi(prev => ({ ...prev, email: e.target.value }))}
+                className="mt-1 block w-full rounded border-gray-300 shadow-sm"
+                placeholder="example@email.com"
+              />
+            </div>
           </div>
 
           <div>
@@ -330,6 +354,9 @@ const RabbiManager = () => {
               <div>
                 <h3 className="text-lg font-semibold">{`${rabbi.firstName} ${rabbi.lastName}`}</h3>
                 <p className="text-gray-600">{rabbi.city}</p>
+                {rabbi.address && <p className="text-gray-600 text-sm">{rabbi.address}</p>}
+                {rabbi.phone && <p className="text-gray-600 text-sm">טלפון: {rabbi.phone}</p>}
+                {rabbi.email && <p className="text-gray-600 text-sm">דוא"ל: {rabbi.email}</p>}
                 <div className="mt-2">
                   <div className="flex flex-wrap gap-1">
                     {rabbi.topics.map(topic => (

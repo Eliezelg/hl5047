@@ -74,7 +74,7 @@ const RabbisPage = () => {
     return matchesTopic && matchesCity && matchesSearch;
   });
 
-  const cities = Array.from(new Set(rabbis.map(rabbi => rabbi.city).filter(Boolean))).sort();
+  const cities = Array.from(new Set(rabbis.map(rabbi => rabbi.city).filter((city): city is string => Boolean(city)))).sort();
 
   if (loading) {
     return (

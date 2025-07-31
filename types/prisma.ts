@@ -6,6 +6,8 @@ export interface Rabbi {
   id: string;
   firstName: string;
   lastName: string;
+  phone: string | null;
+  email: string | null;
   topics: RabbiTopic[];
   address: string | null;
   city: string | null;
@@ -47,10 +49,12 @@ export interface Distributor {
 }
 
 // Conversion functions
-export const convertPrismaRabbi = (rabbi: PrismaRabbi): Rabbi => ({
+export const convertPrismaRabbi = (rabbi: any): Rabbi => ({
   id: rabbi.id,
   firstName: rabbi.firstName,
   lastName: rabbi.lastName,
+  phone: rabbi.phone || null,
+  email: rabbi.email || null,
   topics: rabbi.topics as RabbiTopic[],
   address: rabbi.address,
   city: rabbi.city,

@@ -7,6 +7,8 @@ export async function getRabbis() {
         id: true,
         firstName: true,
         lastName: true,
+        phone: true,
+        email: true,
         topics: true,
         address: true,
         city: true,
@@ -32,6 +34,8 @@ export async function getRabbiById(id: string) {
         id: true,
         firstName: true,
         lastName: true,
+        phone: true,
+        email: true,
         topics: true,
         address: true,
         city: true,
@@ -52,6 +56,8 @@ export async function getRabbiById(id: string) {
 export async function createRabbi(data: {
   firstName: string;
   lastName: string;
+  phone?: string;
+  email?: string;
   topics: string[];
   address?: string;
   city?: string;
@@ -64,6 +70,8 @@ export async function createRabbi(data: {
       data: {
         firstName: data.firstName,
         lastName: data.lastName,
+        phone: data.phone || null,
+        email: data.email || null,
         topics: data.topics,
         address: data.address || '',
         city: data.city || '',
@@ -84,6 +92,8 @@ export async function updateRabbi(
   data: {
     firstName?: string;
     lastName?: string;
+    phone?: string;
+    email?: string;
     topics?: string[];
     address?: string;
     city?: string;
