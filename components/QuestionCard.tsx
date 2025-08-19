@@ -13,11 +13,26 @@ const QuestionCard: React.FC<QuestionCardProps> = ({ qa }) => {
   const [author, setAuthor] = useState<Rabbi | null>(null);
 
   useEffect(() => {
+    // Cache pour éviter les requêtes répétées
+    const cache = (window as any).__rabbiCache || ((window as any).__rabbiCache = new Map());
+    
     const loadAuthor = async () => {
+      // Vérifier le cache d'abord
+      if (cache.has(qa.authorId)) {
+        setAuthor(cache.get(qa.authorId));
+        return;
+      }
+      
       try {
-        const response = await fetch(`/api/rabbis/${qa.authorId}`);
+        const response = await fetch(`/api/rabbis/${qa.authorId}`, {
+          // Ajouter cache HTTP
+          headers: {
+            'Cache-Control': 'max-age=3600'
+          }
+        });
         if (response.ok) {
           const data = await response.json();
+          cache.set(qa.authorId, data); // Mettre en cache
           setAuthor(data);
         }
       } catch (error) {
