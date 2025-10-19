@@ -140,7 +140,7 @@ const Footer = () => {
       </div>
       <div className="mt-4 flex items-center justify-center gap-2 text-sm">
         <span>האתר נבנה ועוצב ע"י</span>
-        <a href="https://webpro650.co.il" target="_blank" rel="noopener noreferrer" className="hover:opacity-80">
+        <a href="https://webpro200.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-80">
           <img src="/webpro-logo.jpg" alt="WebPro Logo" className="h-6" />
         </a>
       </div>

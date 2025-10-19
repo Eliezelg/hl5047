@@ -1,4 +1,4 @@
-const CACHE_NAME = 'halacha-cache-v2';
+const CACHE_NAME = 'halacha-cache-v4';
 
 const urlsToCache = [
   '/',
@@ -9,11 +9,7 @@ const urlsToCache = [
 
 // Liste des routes à ne jamais mettre en cache
 const neverCacheUrls = [
-  '/api/',
-  '/api/qa',
-  '/api/rabbis',
-  '/api/books',
-  '/questions'
+  '/api/'
 ];
 
 // Fonction pour vérifier si une URL ne doit pas être mise en cache
@@ -24,10 +20,19 @@ function shouldNotCache(url) {
 self.addEventListener('install', (event) => {
   // Force le service worker à devenir actif immédiatement
   self.skipWaiting();
-  
+
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(urlsToCache))
+      .then((cache) => {
+        // Mettre en cache uniquement les ressources qui existent
+        return Promise.allSettled(
+          urlsToCache.map(url =>
+            cache.add(url).catch(err => {
+              console.warn('Failed to cache:', url, err);
+            })
+          )
+        );
+      })
   );
 });
 

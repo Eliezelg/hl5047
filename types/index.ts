@@ -26,7 +26,10 @@ export const RABBI_TOPICS = [
   'אבן העזר',
   'ממונות',
   'ריבית',
-  'לשון הרע ורכילות'
+  'לשון הרע ורכילות',
+  // Catégories existantes dans la base
+  'בשר בחלב',
+  'חגים'
 ] as const;
 
 export const QUESTION_TOPICS = [
