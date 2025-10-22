@@ -1,26 +1,26 @@
 import { alefMuktzeh } from './letters/alef';
 import { ayinMuktzeh } from './letters/ayin';
-import { betMuktzeh } from './letters/bet';
-import { chetMuktzeh } from './letters/chet';
-import { daletMuktzeh } from './letters/dalet';
+import { bethMuktzeh } from './letters/beth';
+import { dalethMuktzeh } from './letters/daleth';
 import { gimelMuktzeh } from './letters/gimel';
-import { heyMuktzeh } from './letters/hey';
+import { heMuktzeh } from './letters/he';
+import { hethMuktzeh } from './letters/heth';
+import { vavMuktzeh } from './letters/vav';
+import { zayinMuktzeh } from './letters/zayin';
+import { tetMuktzeh } from './letters/tet';
+import { yodMuktzeh } from './letters/yod';
 import { kafMuktzeh } from './letters/kaf';
-import { kufMuktzeh } from './letters/kuf';
 import { lamedMuktzeh } from './letters/lamed';
-import { memMuktzeh } from './letters/mem';
-import { membisMuktzeh } from './letters/membis';
+import { mem1Muktzeh } from './letters/mem1';
+import { mem2Muktzeh } from './letters/mem2';
 import { nunMuktzeh } from './letters/nun';
-import { pehMuktzeh } from './letters/peh';
-import { reishMuktzeh } from './letters/reish';
 import { samechMuktzeh } from './letters/samech';
+import { peMuktzeh } from './letters/pe';
+import { tzadikMuktzeh } from './letters/tzadik';
+import { koufMuktzeh } from './letters/kouf';
+import { reshMuktzeh } from './letters/resh';
 import { shinMuktzeh } from './letters/shin';
 import { tavMuktzeh } from './letters/tav';
-import { tetMuktzeh } from './letters/tet';
-import { tsadiMuktzeh } from './letters/tsadi';
-import { vavMuktzeh } from './letters/vav';
-import { yudMuktzeh } from './letters/yud';
-import { zayinMuktzeh } from './letters/zayin';
 
 export interface MuktzehItem {
   name: string;
@@ -37,26 +37,26 @@ export interface MuktzehCategory {
 
 export const muktzehItems: MuktzehCategory[] = [
   alefMuktzeh,
-  ayinMuktzeh,
-  betMuktzeh,
-  chetMuktzeh,
-  daletMuktzeh,
+  bethMuktzeh,
   gimelMuktzeh,
-  heyMuktzeh,
-  kafMuktzeh,
-  kufMuktzeh,
-  lamedMuktzeh,
-  memMuktzeh,
-  membisMuktzeh,
-  nunMuktzeh,
-  pehMuktzeh,
-  reishMuktzeh,
-  samechMuktzeh,
-  shinMuktzeh,
-  tavMuktzeh,
-  tetMuktzeh,
-  tsadiMuktzeh,
+  dalethMuktzeh,
+  heMuktzeh,
   vavMuktzeh,
-  yudMuktzeh,
-  zayinMuktzeh
+  zayinMuktzeh,
+  hethMuktzeh,
+  tetMuktzeh,
+  yodMuktzeh,
+  kafMuktzeh,
+  lamedMuktzeh,
+  mem1Muktzeh,
+  mem2Muktzeh,
+  nunMuktzeh,
+  samechMuktzeh,
+  ayinMuktzeh,
+  peMuktzeh,
+  tzadikMuktzeh,
+  koufMuktzeh,
+  reshMuktzeh,
+  shinMuktzeh,
+  tavMuktzeh
 ];
