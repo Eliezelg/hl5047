@@ -1,32 +1,14 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm install)",
-      "Bash(npx prisma:*)",
-      "Bash(convert:*)",
-      "Bash(npx sharp-cli:*)",
-      "Bash(cp:*)",
-      "Bash(ls:*)",
-      "Bash(npm run dev:*)",
-      "Bash(node:*)",
-      "Bash(rm:*)",
-      "Bash(grep:*)",
-      "Bash(npm install:*)",
-      "Bash(curl:*)",
-      "Bash(npm run build:*)",
-      "Bash(git config:*)",
-      "Bash(git pull:*)",
-      "Bash(git add:*)",
-      "Bash(git commit:*)",
-      "Bash(git push:*)",
-      "Bash(git rm:*)",
-      "Bash(pkill:*)",
-      "Bash(true)",
-      "Bash(psql:*)",
-      "Bash(mv:*)",
-      "WebFetch(domain:drive.google.com)",
-      "Bash(git fetch:*)"
+      "Bash(python3 verify_ayin.py)",
+      "Bash(python3 verify_pe.py)",
+      "Bash(python3 verify_tav.py)",
+      "Bash(xargs -n1 basename)",
+      "Bash(sort echo \"\" echo \"=== Fichiers sources manquants ===\" echo \"- pe muktze.ini (déjà fait)\" echo \"- rech muktzeh.ini (à faire - RESH)\" echo \"\" echo \"Vérification fichier rech:\" ls -lh /home/eli/Documents/hl5047/docs/rech*)",
+      "Bash(git add .)"
     ],
-    "deny": []
+    "deny": [],
+    "ask": []
   }
 }

@@ -10,12 +10,12 @@ export const zayinMuktzeh = {
     {
       name: "זבל כימי",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "זהב לא מעובד",
       status: "מוקצה מחמת חסרון כיס",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "זווית המתחברת לקיר",
@@ -25,7 +25,7 @@ export const zayinMuktzeh = {
     {
       name: "זונדה דלוקה או כבויה",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח",
+      source: "",
       description: "ראה אינהלציה"
     },
     {
@@ -42,7 +42,7 @@ export const zayinMuktzeh = {
     {
       name: "זיקוקים",
       status: "מלאכתו לאיסור שאין בו היתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "זיתים שאינם כבושים",
@@ -52,12 +52,12 @@ export const zayinMuktzeh = {
     {
       name: "זכוכית חלון שלימה או שבורה",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "זכוכית מגדלת",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "זכוכית מגדלת עם פנס",
@@ -73,7 +73,7 @@ export const zayinMuktzeh = {
     {
       name: "זנגביל גרגירים",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "זנגביל גרגירים ביו\"ט",
@@ -93,32 +93,32 @@ export const zayinMuktzeh = {
     {
       name: "זפת",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "זר פרחים",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "זרחן",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "זרעוני חיטה",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "זרעוני חיטה ביו\"ט",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "זרעוני צמחים",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     }
   ]
-}; 
+};

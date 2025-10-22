@@ -1,0 +1,22 @@
+{
+  "source_count": 676,
+  "target_count": 676,
+  "entry_count_match": true,
+  "first_10_matches": 7,
+  "last_10_matches": 4,
+  "sample_matches": 25,
+  "sample_size": 40,
+  "sample_match_percentage": 62.5,
+  "total_matches": 459,
+  "total_mismatches": 217,
+  "accuracy_percentage": 67.89940828402366,
+  "missing_entries": 0,
+  "extra_entries": 0,
+  "quality": "POOR ✗ (significant issues)",
+  "mismatch_types": {
+    "name": 35,
+    "status": 185,
+    "source": 1,
+    "description": 153
+  }
+}

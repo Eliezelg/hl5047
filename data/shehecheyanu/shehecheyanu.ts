@@ -1,65 +1,69 @@
-export interface ShehecheyanuItemDetail {
+export interface ShehecheyanuBenediction {
+    statut: boolean;
+    texte: string;
+}
+
+export interface ShehecheyanuInfestation {
+    texte: string;
+}
+
+export interface ShehecheyanuEntry {
     nom: string;
-    benediction: {
-        statut: boolean;
-        texte: string;
-    };
-    infestation?: {
-        texte: string;
-    };
+    benediction: ShehecheyanuBenediction;
+    infestation?: ShehecheyanuInfestation;
 }
 
 export interface ShehecheyanuItem {
     lettre: string;
-    items: ShehecheyanuItemDetail[];
+    items: ShehecheyanuEntry[];
 }
 
 // Import des items par lettre
-import { alefItems } from './letters/alef';
-import { betItems } from './letters/bet';
-import { gimelItems } from './letters/gimel';
-import { daletItems } from './letters/dalet';
-import { heyItems } from './letters/hey';
-import { vavItems } from './letters/vav';
-import { zayinItems } from './letters/zayin';
-import { hetItems } from './letters/het';
-import { tetItems } from './letters/tet';
-import { yodItems } from './letters/yod';
-import { kafItems } from './letters/kaf';
-import { lamedItems } from './letters/lamed';
-import { memItems } from './letters/mem';
-import { nunItems } from './letters/nun';
-import { samechItems } from './letters/samech';
-import { ayinItems } from './letters/ayin';
-import { peItems } from './letters/pe';
-import { tsadiItems } from './letters/tsadi';
-import { kufItems } from './letters/kuf';
-import { reshItems } from './letters/resh';
-import { shinItems } from './letters/shin';
-import { tavItems } from './letters/tav';
+import { AlefItems } from './letters/Alef';
+import { BethItems } from './letters/Beth';
+import { GimelItems } from './letters/Gimel';
+import { DalethItems } from './letters/Daleth';
+import { HeItems } from './letters/He';
+import { VavItems } from './letters/Vav';
+import { ZayinItems } from './letters/Zayin';
+import { HethItems } from './letters/Heth';
+import { TetItems } from './letters/Tet';
+import { YodItems } from './letters/Yod';
+import { KafItems } from './letters/Kaf';
+import { LamedItems } from './letters/Lamed';
+import { MemItems } from './letters/Mem';
+import { NounItems } from './letters/Noun';
+import { SamechItems } from './letters/Samech';
+import { AyinItems } from './letters/Ayin';
+import { PeItems } from './letters/Pe';
+import { TzadikItems } from './letters/Tzadik';
+import { KoufItems } from './letters/Kouf';
+import { ReshItems } from './letters/Resh';
+import { ShinItems } from './letters/Shin';
+import { TavItems } from './letters/Tav';
 
 // Export de tous les items
 export const shehecheyanuItems = {
-    'א': alefItems,
-    'ב': betItems,
-    'ג': gimelItems,
-    'ד': daletItems,
-    'ה': heyItems,
-    'ו': vavItems,
-    'ז': zayinItems,
-    'ח': hetItems,
-    'ט': tetItems,
-    'י': yodItems,
-    'כ': kafItems,
-    'ל': lamedItems,
-    'מ': memItems,
-    'נ': nunItems,
-    'ס': samechItems,
-    'ע': ayinItems,
-    'פ': peItems,
-    'צ': tsadiItems,
-    'ק': kufItems,
-    'ר': reshItems,
-    'ש': shinItems,
-    'ת': tavItems
+    'א': AlefItems,
+    'ב': BethItems,
+    'ג': GimelItems,
+    'ד': DalethItems,
+    'ה': HeItems,
+    'ו': VavItems,
+    'ז': ZayinItems,
+    'ח': HethItems,
+    'ט': TetItems,
+    'י': YodItems,
+    'כ': KafItems,
+    'ל': LamedItems,
+    'מ': MemItems,
+    'נ': NounItems,
+    'ס': SamechItems,
+    'ע': AyinItems,
+    'פ': PeItems,
+    'צ': TzadikItems,
+    'ק': KoufItems,
+    'ר': ReshItems,
+    'ש': ShinItems,
+    'ת': TavItems
 };

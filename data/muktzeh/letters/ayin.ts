@@ -4,7 +4,8 @@ export const ayinMuktzeh = {
   items: [
     {
       name: "עג'ואים",
-      status: "תלוי",
+      status: "",
+      source: "",
       description: "ראה גרעין משמש"
     },
     {
@@ -14,7 +15,8 @@ export const ayinMuktzeh = {
     },
     {
       name: "עגיל שאבד הסוגר שלו",
-      status: "מלאכתו להיתר"
+      status: "מלאכתו להיתר",
+      source: ""
     },
     {
       name: "עגילים",
@@ -24,61 +26,74 @@ export const ayinMuktzeh = {
     },
     {
       name: "עגלה המחוברת לבעלי חיים",
-      status: "מלאכתו לאיסור"
+      status: "מלאכתו לאיסור",
+      source: ""
     },
     {
       name: "עגלה לסבלים",
-      status: "תלוי",
+      status: "",
+      source: "",
       description: "ראה סבליקה לסבל"
     },
     {
       name: "עגלה של סופר",
-      status: "מלאכתו להיתר"
+      status: "מלאכתו להיתר",
+      source: ""
     },
     {
       name: "עגלה שנפל גלגל, דין העגלה והגלגל",
-      status: "תלוי",
+      status: "",
+      source: "",
       description: "ראה גלגל עגלה שהתפרק"
     },
     {
       name: "עגלת ירקות",
-      status: "תלוי",
+      status: "",
+      source: "",
       description: "ראה מתקן ירקות"
     },
     {
       name: "עגלת משטחים",
-      status: "תלוי",
+      status: "",
+      source: "",
       description: "ראה משטח סחורה"
     },
     {
       name: "עגלת נכה",
-      status: "מלאכתו להיתר"
+      status: "מלאכתו להיתר",
+      source: ""
     },
     {
       name: "עגלת נכה חשמלית",
-      status: "מלאכתו לאיסור"
+      status: "מלאכתו לאיסור",
+      source: ""
     },
     {
       name: "עגלת שוק",
-      status: "תלוי",
+      status: "",
+      source: "",
       description: "ראה עגלה של סופר וסל קניות"
     },
     {
       name: "עגלת תינוק",
-      status: "מלאכתו להיתר"
+      status: "מלאכתו להיתר",
+      source: ""
     },
     {
       name: "עד בדיקה חדש",
-      status: "מלאכתו להיתר"
+      status: "מלאכתו להיתר",
+      source: ""
     },
     {
       name: "עד בדיקה לאחר השימוש",
       status: "מלאכתו להיתר",
+      source: "",
       description: "אם יש מה ללמוד ממנו"
     },
     {
       name: "עדשה שנפלה מהמשקפיים, דין העדשה והמשקפיים",
-      status: "תלוי",
+      status: "",
+      source: "",
       description: "ראה משקפיים שנפלה העדשה"
     },
     {
@@ -97,9 +112,14 @@ export const ayinMuktzeh = {
       source: "ש\"י הערה ע\"ג"
     },
     {
-      name: "עוגת הבית אריזה ריקה",
-      status: "תלוי",
-      description: "יש פירורים מותר. אין פירורים מוקצה מחמת גופו"
+      name: "עוגת הבית אריזה ריקה - יש פירורים",
+      status: "מותר",
+      source: ""
+    },
+    {
+      name: "עוגת הבית אריזה ריקה - אין פירורים",
+      status: "מוקצה מחמת גופו",
+      source: ""
     },
     {
       name: "עור של בהמה",
@@ -108,7 +128,8 @@ export const ayinMuktzeh = {
     },
     {
       name: "עור שנתלש מהגוף",
-      status: "מוקצה מחמת גופו"
+      status: "מוקצה מחמת גופו",
+      source: ""
     },
     {
       name: "עט המגולגל בתוכו ברכון",
@@ -122,56 +143,62 @@ export const ayinMuktzeh = {
     },
     {
       name: "עט יקר שמקפיד עליו",
-      status: "מוקצה מחמת חסרון כיס"
+      status: "מוקצה מחמת חסרון כיס",
+      source: ""
     },
     {
       name: "עט כל הסוגים",
-      status: "מלאכתו לאיסור"
+      status: "מלאכתו לאיסור",
+      source: ""
     },
     {
       name: "עט שנגמר",
-      status: "מוקצה מחמת גופו"
+      status: "מוקצה מחמת גופו",
+      source: ""
     },
     {
       name: "עטיפה של ארטיק",
-      status: "תלוי",
+      status: "",
+      source: "",
       description: "ראה נייר עטיפה של ארטיק או וופלה"
     },
     {
       name: "עטיפה של תה ריקה",
-      status: "מלאכתו להיתר"
+      status: "מלאכתו להיתר",
+      source: ""
     },
     {
       name: "עטיפות מחברות",
-      status: "תלוי",
+      status: "",
+      source: "",
       description: "ראה מעטפות למחברות"
     },
     {
       name: "עטיפת איגלו ושלוק",
-      status: "תלוי",
+      status: "",
+      source: "",
       description: "ראה שקית איגלו ריקה"
     },
     {
       name: "עטיפת מזון ריקה",
-      status: "תלוי",
+      status: "",
+      source: "",
       description: "ראה אריזת מזון ריקה"
     },
     {
       name: "עטיפת מתנה קרועה",
-      status: "מוקצה מחמת גופו"
-    },
-    {
-      name: "עטיפת סוכריה",
-      status: "תלוי",
-      description: "ראה נייר עטיפה של סוכריה"
+      status: "מוקצה מחמת גופו",
+      source: ""
     },
     {
       name: "עטיפת פצפצים",
-      status: "מוקצה מחמת גופו"
+      status: "מוקצה מחמת גופו",
+      source: ""
     },
     {
       name: "עטיפת קרמבו",
-      status: "תלוי",
+      status: "",
+      source: "",
       description: "ראה נייר עטיפה של קרמבו"
     },
     {
@@ -192,15 +219,18 @@ export const ayinMuktzeh = {
     },
     {
       name: "עיסת בצק",
-      status: "מוקצה מחמת גופו"
+      status: "מוקצה מחמת גופו",
+      source: ""
     },
     {
       name: "עיסת בצק ביו\"ט",
-      status: "מלאכתו להיתר"
+      status: "מלאכתו להיתר",
+      source: ""
     },
     {
       name: "עירוב תבשילין ביו\"ט",
-      status: "מותר"
+      status: "מותר",
+      source: ""
     },
     {
       name: "עיתון חילוני",
@@ -209,13 +239,19 @@ export const ayinMuktzeh = {
     },
     {
       name: "עיתון שרובו דברי תורה",
-      status: "מותר"
+      status: "מותר",
+      source: ""
     },
     {
-      name: "עיתון שרובו סיפורים",
-      status: "תלוי",
+      name: "עיתון שרובו סיפורים - תורני",
+      status: "מותר",
+      source: "ש\"ז סל\"ג ול\"ז"
+    },
+    {
+      name: "עיתון שרובו סיפורים - חול",
+      status: "מוקצה מחמת גופו",
       source: "ש\"ז סל\"ג ול\"ז",
-      description: "תורני מותר. חול דינו כעיתון שרובו חדשות"
+      description: "דינו כעיתון שרובו חדשות"
     },
     {
       name: "עיתון שרובו ענייני חדשות",
@@ -230,7 +266,8 @@ export const ayinMuktzeh = {
     },
     {
       name: "עכבר של מחשב",
-      status: "מוקצה מחמת חסרון כיס"
+      status: "מוקצה מחמת חסרון כיס",
+      source: ""
     },
     {
       name: "עלה מחובר או תלוש",
@@ -240,15 +277,18 @@ export const ayinMuktzeh = {
     {
       name: "עלה שנשר מהדס מצוה בסוכות",
       status: "מוקצה מחמת מצוה",
+      source: "",
       description: "עד שמחת תורה"
     },
     {
       name: "עלון התרמה",
-      status: "מלאכתו לאיסור"
+      status: "מלאכתו לאיסור",
+      source: ""
     },
     {
       name: "עלי דפנה",
-      status: "מוקצה מחמת גופו"
+      status: "מוקצה מחמת גופו",
+      source: ""
     },
     {
       name: "עלי דפנה ביו\"ט",
@@ -256,10 +296,14 @@ export const ayinMuktzeh = {
       source: "ש\"י הערה ע\"ג"
     },
     {
-      name: "עלי הגהה",
-      status: "תלוי",
-      source: "ש\"ו הערה מ\"ח",
-      description: "מלאכתו לאיסור. רגיל ללמוד ולהגיה, מותר"
+      name: "עלי הגהה - רגיל ללמוד ולהגיה",
+      status: "מותר",
+      source: "ש\"ו הערה מ\"ח"
+    },
+    {
+      name: "עלי הגהה - לא רגיל",
+      status: "מלאכתו לאיסור",
+      source: "ש\"ו הערה מ\"ח"
     },
     {
       name: "עלים שיש בהם ריח שנשרו בשבת",
@@ -268,26 +312,30 @@ export const ayinMuktzeh = {
     },
     {
       name: "עמוד שליח ציבור",
-      status: "מלאכתו להיתר"
+      status: "מלאכתו להיתר",
+      source: ""
     },
     {
       name: "עמוד תמרור שנפל",
-      status: "מוקצה מחמת גופו"
+      status: "מוקצה מחמת גופו",
+      source: ""
     },
     {
       name: "עמילן כביסה",
-      status: "מלאכתו לאיסור שאין בו היתר",
-      source: "ש\"ח סע\"ב"
+      status: "מלאכתו לאיסור",
+      source: "ש\"ח סע\"ב",
+      description: "שאין בו היתר"
     },
     {
       name: "ענבי בוסר",
-      status: "תלוי",
+      status: "אינם מוקצה",
       source: "ש\"ח סצ\"ב",
-      description: "אם נאכלים על ידי הדחק אינם מוקצה"
+      description: "אם נאכלים על ידי הדחק"
     },
     {
       name: "עניבה מלוכלכת",
-      status: "תלוי",
+      status: "",
+      source: "",
       description: "ראה בגד מטונף"
     },
     {
@@ -298,7 +346,8 @@ export const ayinMuktzeh = {
     },
     {
       name: "עניבה שנקשרה בשבת באופן האסור",
-      status: "תלוי",
+      status: "מותר",
+      source: "",
       description: "דינה כסתם עניבה"
     },
     {
@@ -309,11 +358,13 @@ export const ayinMuktzeh = {
     {
       name: "ענפי דקל שייחדם לסכך",
       status: "מלאכתו לאיסור",
+      source: "",
       description: "ע\"ע סכך"
     },
     {
       name: "עפיפון",
-      status: "מלאכתו להיתר"
+      status: "מלאכתו להיתר",
+      source: ""
     },
     {
       name: "עפר",
@@ -322,25 +373,30 @@ export const ayinMuktzeh = {
     },
     {
       name: "עפר שייחדו לשימוש",
-      status: "תלוי",
+      status: "",
+      source: "",
       description: "ראה חול"
     },
     {
       name: "עפרון רגיל או צבעים",
       status: "מלאכתו לאיסור",
+      source: "",
       description: "ראה הערה לערך עט"
     },
     {
       name: "עץ",
-      status: "מוקצה מחמת גופו"
+      status: "מוקצה מחמת גופו",
+      source: ""
     },
     {
       name: "עץ נוי המחובר לקרקע",
-      status: "מלאכתו להיתר"
+      status: "מלאכתו להיתר",
+      source: ""
     },
     {
       name: "עצי בשמים מחוברים ותלושים",
-      status: "תלוי",
+      status: "",
+      source: "",
       description: "ראה בשמים"
     },
     {
@@ -350,18 +406,20 @@ export const ayinMuktzeh = {
     },
     {
       name: "עצי הסקה ביו\"ט",
-      status: "תלוי",
+      status: "מותר",
       source: "ש\"ח הערה תע\"ב",
-      description: "מותר לטלטלם רק לצורך הסקה"
+      description: "לטלטלם רק לצורך הסקה"
     },
     {
       name: "עצי חיים",
-      status: "תלוי",
+      status: "",
+      source: "",
       description: "ראה ידית ספר תורה שנשמטה"
     },
     {
       name: "עצי סוכה",
-      status: "תלוי",
+      status: "",
+      source: "",
       description: "ראה דפנות סוכה"
     },
     {
@@ -371,30 +429,32 @@ export const ayinMuktzeh = {
     },
     {
       name: "עציץ יקר מאוד שמקפיד שלא לטלטלו כלל",
-      status: "תלוי",
+      status: "מוקצה מחמת חסרון כיס",
       source: "ש\"ח ס\"ד",
-      description: "מוקצה מחמת חסרון כיס, ויש אומרים מלאכתו להיתר"
+      description: "ויש אומרים מלאכתו להיתר"
     },
     {
       name: "עציץ עם מים או אדמה",
-      status: "תלוי",
+      status: "",
+      source: "",
       description: "ראה אגרטל ואדנית"
     },
     {
       name: "עצמות בקר",
-      status: "תלוי",
+      status: "מוקצה",
       source: "ש\"ח הערה תקע\"ב",
-      description: "מוקצה. אם יש בתוכם מוח, או מעט בשר עליהם, מותר"
+      description: "אם יש בתוכם מוח, או מעט בשר עליהם, מותר"
     },
     {
       name: "עצמות עוף",
-      status: "תלוי",
+      status: "מוקצה",
       source: "ש\"ח ס\"צ",
-      description: "מוקצה. אם יש בתוכם מוח, מעט בשר עליהם, או עצם רכה, מותר"
+      description: "אם יש בתוכם מוח, מעט בשר עליהם, או עצם רכה, מותר"
     },
     {
       name: "ערבה",
-      status: "מוקצה מחמת גופו"
+      status: "מוקצה מחמת גופו",
+      source: ""
     },
     {
       name: "ערבה חבוטה שייחדה לשמירה",
@@ -403,46 +463,54 @@ export const ayinMuktzeh = {
     },
     {
       name: "ערדליים",
-      status: "מלאכתו להיתר"
+      status: "מלאכתו להיתר",
+      source: ""
     },
     {
       name: "עריסה",
-      status: "מלאכתו להיתר"
+      status: "מלאכתו להיתר",
+      source: ""
     },
     {
       name: "עריסה שהתפרק גלגל",
-      status: "תלוי",
+      status: "",
+      source: "",
       description: "ראה גלגל שהתפרק מהעגלה"
     },
     {
       name: "ערכת בדיקת חמץ",
-      status: "תלוי",
-      description: "נכון להחמיר כמוקצה"
+      status: "מוקצה",
+      source: "",
+      description: "נכון להחמיר"
     },
     {
       name: "ערכת הבדלה",
-      status: "תלוי",
-      description: "נכון להחמיר כמוקצה. עי' ערכת בדיקת חמץ"
+      status: "מוקצה",
+      source: "",
+      description: "נכון להחמיר. עי' ערכת בדיקת חמץ"
     },
     {
       name: "ערכת תיק מוהל",
       status: "מוקצה",
+      source: "",
       description: "בשבת שיש ברית, ראה סכין מילה"
     },
     {
       name: "ערלת ברית",
-      status: "תלוי",
+      status: "אינה מוקצה",
       source: "ש\"ח סוף הערה קע\"ב",
-      description: "אינה מוקצה עד נתינתה לעפר"
+      description: "עד נתינתה לעפר"
     },
     {
       name: "ערסל",
-      status: "תלוי",
+      status: "",
+      source: "",
       description: "ראה נדנדה"
     },
     {
       name: "ערסל מחובר או נפל",
-      status: "תלוי",
+      status: "",
+      source: "",
       description: "ראה ערך נדנדה"
     },
     {
@@ -457,7 +525,8 @@ export const ayinMuktzeh = {
     },
     {
       name: "עתיקות",
-      status: "מלאכתו להיתר"
+      status: "מלאכתו להיתר",
+      source: ""
     }
   ]
-}; 
+};

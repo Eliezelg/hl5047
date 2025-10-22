@@ -3,10 +3,9 @@ export const vavMuktzeh = {
   letter: "ו",
   items: [
     {
-      name: "וו תליה",
+      name: "וו תליה (מתלה שתולים אותו כמות שהוא)",
       status: "מלאכתו להיתר",
-      source: "ש\"ח",
-      description: "מתלה שתולים אותו כמות שהוא"
+      source: ""
     },
     {
       name: "וו תליה דבק חדש",
@@ -26,12 +25,17 @@ export const vavMuktzeh = {
     {
       name: "וו תליה ואקום חדש",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "וו תליה ואקום שנפל ממקרר",
       status: "מלאכתו להיתר",
       source: "ש\"ח הערה שט\"ז"
+    },
+    {
+      name: "וו תליה ואקום שנפל מקיר",
+      status: "מוקצה מחמת גופו",
+      source: "ש\"ח סנ\"ו"
     },
     {
       name: "וו תליה עם ברגים חדש",
@@ -46,19 +50,18 @@ export const vavMuktzeh = {
     {
       name: "וזלין",
       status: "מלאכתו לאיסור שאין בו היתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
-      name: "ויזה",
+      name: "ויזה (אשראי, או טיסה)",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח הערה י\"ז",
-      description: "אשראי, או טיסה"
+      source: "ש\"ח הערה י\"ז"
     },
     {
       name: "ויטמינים לחיזוק",
-      status: "מחלוקת",
-      source: "ש\"ח",
-      description: "מוקצה מחמת גופו, וי\"א דלבני ספרד מלאכתו להיתר"
+      status: "מוקצה מחמת גופו",
+      source: "",
+      description: "וי\"א דלבני ספרד מלאכתו להיתר"
     },
     {
       name: "ויטמינים לרפואה",
@@ -68,12 +71,12 @@ export const vavMuktzeh = {
     {
       name: "ויטמינים מתוקים לילדים",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "ויטמינים תחליף מזון",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "ויטרינה שהתפרקה",
@@ -84,7 +87,7 @@ export const vavMuktzeh = {
       name: "ויטרינה שהתפרקו דלתותיה",
       status: "מלאכתו להיתר",
       source: "ש\"ח סנ\"ד והערה שט\"ז",
-      description: "שניהם מלאכתו להיתר"
+      description: "שניהם"
     },
     {
       name: "וילון אמבטיה רטוב",
@@ -94,7 +97,7 @@ export const vavMuktzeh = {
     {
       name: "וילון לא תלוי",
       status: "מלאכתו להיתר",
-      source: "ש\"ח",
+      source: "",
       description: "חדש או נשמט"
     },
     {
@@ -105,12 +108,12 @@ export const vavMuktzeh = {
     {
       name: "וילון שנפל עם צינור לחץ שאוחזו",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "וילון תלוי",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "ונטה חדשה או נשמטה",
@@ -118,4 +121,4 @@ export const vavMuktzeh = {
       source: "ש\"ח הערה שס\"ו"
     }
   ]
-}; 
+};

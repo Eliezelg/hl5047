@@ -30,21 +30,10 @@ export const alefMuktzeh = {
       description: "שניהם מלאכתו להיתר"
     },
     {
-      name: "אמגזית",
-      status: "מלאכתו לאיסור",
-      source: "ש\"ח סע\"ב",
-      description: "נכון להחמיר כמוקצה מחמת גופו"
-    },
-    {
-      name: "אמה נוזלית לכלים",
-      status: "מלאכתו להיתר",
-      source: "ש\"ח סעיף ע\"ב",
-      description: "המחמיר כמוקצה תע\"ב"
-    },
-    {
       name: "אבזם שהתפרק מהחגורה",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח סעי' ס\"ז"
+      source: "ש\"ח סעי' ס\"ז",
+      description: "שניהם מוקצה מחמת גופו"
     },
     {
       name: "אבידה",
@@ -55,7 +44,7 @@ export const alefMuktzeh = {
     {
       name: "אבן",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אבן הר סיני",
@@ -81,7 +70,7 @@ export const alefMuktzeh = {
     {
       name: "אבנט (גרטל)",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אבני אנרגיה/מזל/סגולה",
@@ -91,13 +80,14 @@ export const alefMuktzeh = {
     {
       name: "אבני חן שנפלו מהשרשרת",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח הערה ש\"י"
+      source: "ש\"ח הערה ש\"י",
+      description: "שניהם מוקצה מחמת גופו"
     },
     {
       name: "אבנים שייחד למשחק",
       status: "מוקצה מחמת גופו",
       source: "ש\"ח סעיף ע\"ד וקי\"ז",
-      description: "לבני ספרד מוקצה מחמת גופו, לבני אשכנז וכן לבני ספרד מתחת לגיל מצוות, מלאכתו להיתר"
+      description: "לבני ספרד מוקצה מחמת גופו, לבני אשכנז וכן לבני ספרד מתחת לגיל מצוות, מלאכתו להיתר. יחוד קטן אינו כלום"
     },
     {
       name: "אבנים שייחד לזרוק על בעלי חיים או גנבים",
@@ -105,7 +95,7 @@ export const alefMuktzeh = {
       source: "ש\"ח סוף הערה תפ\"ה"
     },
     {
-      name: "אבנים שמיוצרות למשחק",
+      name: "אבנים שמיוצרות למשחק (חמש אבנים וכדו')",
       status: "מלאכתו להיתר",
       source: "ש\"ח סעיף קי\"ז"
     },
@@ -128,7 +118,7 @@ export const alefMuktzeh = {
     {
       name: "אבקות רפואיות",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אבקת אפיה",
@@ -154,7 +144,7 @@ export const alefMuktzeh = {
     {
       name: "אבקת חלב מהדרין",
       status: "מותר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אבקת חלב נכרי",
@@ -165,7 +155,7 @@ export const alefMuktzeh = {
     {
       name: "אבקת טלק",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אבקת כביסה",
@@ -175,38 +165,38 @@ export const alefMuktzeh = {
     {
       name: "אבקת מרק",
       status: "מותר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אבקת סודה",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אבקת סודה ביום טוב",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אבקת סוכר",
       status: "מותר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אבקת פודינג",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח",
+      source: "",
       description: "ראה אבקת ג'לי"
     },
     {
       name: "אבקת פודרה",
       status: "מלאכתו לאיסור שאין בו היתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אבקת פלאפל",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אבקת פלאפל ביום טוב",
@@ -216,28 +206,28 @@ export const alefMuktzeh = {
     {
       name: "אבקת תפו\"א",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אבקת תפו\"א ביו\"ט",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אגוזים עם קליפה",
       status: "מותר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אגס קשה כאבן",
       status: "מותר",
-      source: "ש\"ח",
+      source: "",
       description: "ע\"ע אבוקדו"
     },
     {
       name: "אגרטל בשמים או פרחים",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אגרטל יקר מאוד שמקפיד שלא לטלטלו כלל",
@@ -284,7 +274,7 @@ export const alefMuktzeh = {
     {
       name: "אדמה",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אדמה בתוך עציץ עם פרחי פלסטיק",
@@ -311,22 +301,22 @@ export const alefMuktzeh = {
     {
       name: "אדנית ריקה",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אוגדן",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אודם",
       status: "מלאכתו לאיסור שאין בו היתר",
-      source: "הליכות שבת ח\"א עמוד תכ\"ה"
+      source: ""
     },
     {
       name: "אוהל כדורים",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אוהל מקופל",
@@ -336,7 +326,7 @@ export const alefMuktzeh = {
     {
       name: "אוהל פתוח או מנופח",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אוהל קמפינג הנפתח במשיכת חוט",
@@ -346,28 +336,28 @@ export const alefMuktzeh = {
     {
       name: "אוזניות",
       status: "מלאכתו לאיסור שאין בו היתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אוזניות אלחוטיות",
       status: "מוקצה מחמת חסרון כיס",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אוזניות נגד רעש",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אוכף",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח",
+      source: "",
       description: "ויש אומרים להיתר"
     },
     {
       name: "אולר",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אולר עם מספריים",
@@ -378,17 +368,17 @@ export const alefMuktzeh = {
     {
       name: "אום של בורג",
       status: "מלאכתו לאיסור שאין בו היתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אומגה",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אומגה מחוברת לעץ",
       status: "מוקצה מחמת איסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אוסף בולים",
@@ -398,12 +388,12 @@ export const alefMuktzeh = {
     {
       name: "אופה לחם",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אופנוע",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אופני ילדים שאינן תקינות",
@@ -414,7 +404,7 @@ export const alefMuktzeh = {
     {
       name: "אופני כושר",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אופניים",
@@ -424,17 +414,17 @@ export const alefMuktzeh = {
     {
       name: "אופניים חשמליות",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אופניים תלת אופן",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אורגנית",
       status: "מוקצה מחמת חסרון כיס",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אורז חי",
@@ -455,49 +445,49 @@ export const alefMuktzeh = {
     {
       name: "אותיות לא מגנט",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אותיות מגנט",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אותיות פאזל",
       status: "מלאכתו להיתר",
-      source: "ש\"ח",
+      source: "",
       description: "חיבור חלש, מלאכתו להיתר. חיבור חזק מלאכתו לאיסור"
     },
     {
       name: "אזיקונים",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אזיקונים קשורים",
       status: "מלאכתו להיתר",
-      source: "ש\"ח",
+      source: "",
       description: "גם החתיכה העודפת"
     },
     {
       name: "אזיקים",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אזיקים אלקטרוניים",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אזיקים משחק",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אזמל של בניה",
       status: "מלאכתו לאיסור שאין בו היתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אטב כביסה",
@@ -507,12 +497,12 @@ export const alefMuktzeh = {
     {
       name: "אטב כביסה שבור",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אטמי אוזניים ספוג/שעוה/סיליקון",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אטריות לא מבושלות",
@@ -527,7 +517,7 @@ export const alefMuktzeh = {
     {
       name: "אילן",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אימום ביתי",
@@ -542,22 +532,22 @@ export const alefMuktzeh = {
     {
       name: "אינהלציה דלוקה או כבויה",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אינטרקום מוניטור לתינוק",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אינפוזיה עמוד",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אינפוזיה עמוד עם אוטומט",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אינפוזיה שקית דם",
@@ -567,12 +557,12 @@ export const alefMuktzeh = {
     {
       name: "אינפוזיה שקית נוזלים",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אינקובטור",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אינקובטור כשתינוק בתוכו",
@@ -587,13 +577,13 @@ export const alefMuktzeh = {
     {
       name: "איפור עם כשרות לשבת",
       status: "מחלוקת",
-      source: "ש\"ח",
+      source: "",
       description: "האודם מלאכתו לאיסור, הסומק מחלוקת הפוסקים"
     },
     {
       name: "אישור כניסה לרכב",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אישור רחיצה לרכב",
@@ -603,33 +593,33 @@ export const alefMuktzeh = {
     {
       name: "אלבום קלפים",
       status: "מלאכתו להיתר",
-      source: "ש\"ח",
+      source: "",
       description: "גם ריק"
     },
     {
       name: "אלבום תמונות דיגיטאלי מחובר לחשמל",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אלבום תמונות להדבקה ריק",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אלבום תמונות להדבקה, עם תמונות",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אלבום תמונות ריק או מלא",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אלונקה",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אלכוהול חיטוי",
@@ -640,22 +630,34 @@ export const alefMuktzeh = {
     {
       name: "אלכוהול לניקוי משטחים",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אלפון טלפונים אישי",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אמבטיה של תינוק",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
+    },
+    {
+      name: "אמגזית",
+      status: "מלאכתו לאיסור",
+      source: "ש\"ח סע\"ב",
+      description: "נכון להחמיר כמוקצה מחמת גופו"
+    },
+    {
+      name: "אמה נוזלית לכלים",
+      status: "מלאכתו להיתר",
+      source: "ש\"ח סעיף ע\"ב",
+      description: "המחמיר כמוקצה תע\"ב"
     },
     {
       name: "אמה סמיכה לכלים",
       status: "מלאכתו לאיסור שאין בו היתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אנטיביוטיקה",
@@ -666,18 +668,13 @@ export const alefMuktzeh = {
     {
       name: "אנטנה",
       status: "מלאכתו לאיסור שאין בו היתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אנטנה מפורקת",
       status: "מלאכתו לאיסור",
       source: "ש\"ח סנ\"ד, הערה ש\"ג",
       description: "דעתו להחזירה מלאכתו לאיסור, אין דעתו להחזירה מוקצה"
-    },
-    {
-      name: "אתרוגים לסחורה",
-      status: "מוקצה מחמת חסרון כיס",
-      source: "ש\"ח ס\"י"
     },
     {
       name: "אסלה שאינה מחוברת",
@@ -692,7 +689,7 @@ export const alefMuktzeh = {
     {
       name: "אפודה מחזירה אור",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אפונה יבשה",
@@ -712,7 +709,7 @@ export const alefMuktzeh = {
     {
       name: "אפר, כל הסוגים",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אפרוחים למכירה ולשעשוע",
@@ -728,17 +725,17 @@ export const alefMuktzeh = {
     {
       name: "אצבע לספר תורה",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אצבע לתפירה",
       status: "מלאכתו לאיסור שאין בו היתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אצבע לתפירה ביו\"ט",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אצטון",
@@ -749,12 +746,12 @@ export const alefMuktzeh = {
     {
       name: "אצטרובל",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אקדח דבק חם",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אקדח ירי",
@@ -770,12 +767,12 @@ export const alefMuktzeh = {
     {
       name: "אקדח מיכני/גז/פלפל",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אקדח מים",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אקדח משמיע קול",
@@ -785,7 +782,7 @@ export const alefMuktzeh = {
     {
       name: "אקדח סיכות",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אקדח סיליקון",
@@ -795,7 +792,7 @@ export const alefMuktzeh = {
     {
       name: "אקדח פיקות",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח",
+      source: "",
       description: "ריק ומלא"
     },
     {
@@ -807,7 +804,7 @@ export const alefMuktzeh = {
     {
       name: "אקורדיון",
       status: "מוקצה מחמת חסרון כיס",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אקוריום עם דגים",
@@ -828,7 +825,7 @@ export const alefMuktzeh = {
     {
       name: "ארגז אחסון לאופנוע ואופניים",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "ארגז חול",
@@ -839,7 +836,7 @@ export const alefMuktzeh = {
     {
       name: "ארגז כלי עבודה מלא",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח",
+      source: "",
       description: "אם רוב החפצים מוקצים, דינו כמוקצה"
     },
     {
@@ -850,32 +847,32 @@ export const alefMuktzeh = {
     {
       name: "ארגז לחם",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "ארגז משחקים",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "ארגז מתקפל",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "ארגז פלטת שבת",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "ארגז פלסטיק מרושת למזון",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "ארון",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "ארון המחובר לקיר ונפל",
@@ -895,7 +892,7 @@ export const alefMuktzeh = {
     {
       name: "ארון לבלוני גז",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "ארון קודש",
@@ -906,7 +903,7 @@ export const alefMuktzeh = {
       name: "ארון ריק שיצרוהו למוקצה",
       status: "מלאכתו לאיסור",
       source: "ש\"ח סי\"ז והערה ע\"ט, ש\"י סכ\"ט",
-      description: "וגם הדלתות, ויש מתירים"
+      description: "מלאכתו לאיסור וגם הדלתות, ויש מתירים"
     },
     {
       name: "ארון ריק שמיועד למוקצה",
@@ -938,7 +935,7 @@ export const alefMuktzeh = {
     {
       name: "ארון שלא ניתן לפותחו",
       status: "מוקצה מחמת איסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "ארון שמקפיד שלא להזיזו",
@@ -987,7 +984,7 @@ export const alefMuktzeh = {
     {
       name: "ארנק עם כסף",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "ארנק ריק",
@@ -998,12 +995,12 @@ export const alefMuktzeh = {
     {
       name: "אשכול ריק בננה או ענבים",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אתרוג ביום טוב סוכות",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "אתרוג בשבת לפני סוכות",
@@ -1028,9 +1025,14 @@ export const alefMuktzeh = {
       source: "ש\"ח סל\"ו"
     },
     {
+      name: "אתרוג לנוי בסוכות",
+      status: "ראה נויי סוכה כל שמונת ימי החג",
+      source: ""
+    },
+    {
       name: "אתרוג מצוה של קטן",
       status: "מלאכתו להיתר",
-      source: "ש\"ח",
+      source: "",
       description: "דינו כאתרוג של גדול"
     },
     {

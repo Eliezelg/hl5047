@@ -9,6 +9,12 @@ export const gimelMuktzeh = {
       description: "דעתו להחזירה מלאכתו להיתר, דעתו לזורקה מוקצה מחמת גופו"
     },
     {
+      name: "גביע גבינה",
+      status: "מלאכתו להיתר",
+      source: "",
+      description: "ראה גביע לבן"
+    },
+    {
       name: "גביע יקר",
       status: "מלאכתו להיתר",
       source: "ש\"ח ס\"ג"
@@ -27,17 +33,17 @@ export const gimelMuktzeh = {
     {
       name: "גבס אבקה",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גבס לוחות",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גבעול של ראש הפרי תלוש",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גגון למרפסת (מרקיזה)",
@@ -52,7 +58,7 @@ export const gimelMuktzeh = {
     {
       name: "גגון עגלת תינוק שנשמט ממקומו",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גגון עגלת תינוק שנשמט ממקומו ודעתו לחברו",
@@ -67,6 +73,7 @@ export const gimelMuktzeh = {
     {
       name: "גדר אקורדיון",
       status: "מלאכתו להיתר",
+      source: "",
       description: "מחובר ולא מחובר"
     },
     {
@@ -77,38 +84,44 @@ export const gimelMuktzeh = {
     {
       name: "גדר בטיחות",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גדר מחוברת לקרקע",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גדר מחוברת לקרקע שהתרופפה",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גדר צמחיה",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גדר צמחיה מלאכותית",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גדר תייל",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח ס\"ע",
+      source: "שח ס\"ע",
       description: "תלוש ומחובר"
+    },
+    {
+      name: "גוגואים",
+      status: "מוקצה מחמת גופו",
+      source: "",
+      description: "ראה גרעיני משמש"
     },
     {
       name: "גוזז ציפורניים",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גולות",
@@ -123,12 +136,12 @@ export const gimelMuktzeh = {
     {
       name: "גומיה",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גומיה קרועה",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גומיית שולחן או מקל הליכה שיצאה ממקומה",
@@ -136,9 +149,21 @@ export const gimelMuktzeh = {
       source: "ש\"ח סנ\"ד"
     },
     {
+      name: "גומיית שיער",
+      status: "מותר",
+      source: "",
+      description: "ראה בגד"
+    },
+    {
       name: "גז מדמיע",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
+    },
+    {
+      name: "גזל של גדול או קטן",
+      status: "תלוי בסוג החפץ",
+      source: "",
+      description: "ראה אבידה"
     },
     {
       name: "גחלים",
@@ -157,19 +182,19 @@ export const gimelMuktzeh = {
     },
     {
       name: "גט",
-      status: "מחלוקת",
+      status: "מוקצה",
       source: "ש\"ז סל\"ח",
       description: "לבני ספרד מוקצה, לבני אשכנז מותר. נתנו לאשה מותר אף לבני ספרד"
     },
     {
       name: "גט ריק",
       status: "מותר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גיגית כביסה",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גיגית כביסה עם בגדים מלוכלכים",
@@ -185,28 +210,27 @@ export const gimelMuktzeh = {
     {
       name: "גיגית כביסה עם מים מלוכלכים",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גיגית לעשיית מלט",
       status: "מלאכתו לאיסור שאין בו היתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גיטרה",
       status: "מוקצה מחמת חסרון כיס",
-      source: "ש\"ח"
+      source: ""
     },
     {
-      name: "גיליוטינה",
+      name: "גיליוטינה (מכשיר לחיתוך נייר כסף)",
       status: "מלאכתו לאיסור שאין בו היתר",
-      source: "ש\"ח",
-      description: "מכשיר לחיתוך נייר כסף"
+      source: ""
     },
     {
       name: "גיליון ציונים ריק או מלא",
       status: "מוקצה מחמת חסרון כיס",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גיליון ציונים של ילד",
@@ -221,22 +245,22 @@ export const gimelMuktzeh = {
     {
       name: "גיר",
       status: "מלאכתו לאיסור שאין בו היתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גיר כתיבה",
       status: "מלאכתו לאיסור שאין בו היתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "ג'ל אלוורה",
       status: "מלאכתו לאיסור שאין בו היתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "ג'ל אלכוהול לחיטוי ידיים",
-      status: "מחלוקת",
-      source: "ש\"ח",
+      status: "מלאכתו להיתר",
+      source: "",
       description: "נשפך, מלאכתו להיתר. לא נשפך, מלאכתו לאיסור"
     },
     {
@@ -245,14 +269,26 @@ export const gimelMuktzeh = {
       source: "ש\"ח הערה קנ\"ח"
     },
     {
+      name: "ג'ל לשיער/לחות/כויות/רחצה",
+      status: "מלאכתו לאיסור שאין בו היתר",
+      source: "",
+      description: "ראה ג'ל אלוורה"
+    },
+    {
       name: "גלאי ראדר",
       status: "מוקצה מחמת חסרון כיס",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גלגל ים מנופח ואינו מנופח",
       status: "מלאכתו לאיסור",
       source: "ש\"ח סט\"ז"
+    },
+    {
+      name: "גלגל עגלה שהתפרק, דין הגלגל",
+      status: "מלאכתו להיתר",
+      source: "ש\"ח סעיף ס\"ז",
+      description: "נכון להחמיר כמלאכתו לאיסור"
     },
     {
       name: "גלגל עגלה שהתפרק, דין העגלה",
@@ -294,7 +330,7 @@ export const gimelMuktzeh = {
     {
       name: "גלויה כתובה דברי תורה",
       status: "מותר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גלויה ריקה",
@@ -304,12 +340,12 @@ export const gimelMuktzeh = {
     {
       name: "גלון מי עדן מלא",
       status: "מותר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גלון מי עדן ריק",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גליון רפואי",
@@ -353,9 +389,14 @@ export const gimelMuktzeh = {
       source: "ש\"ח הערה תקי\"ח"
     },
     {
+      name: "גליל נייר טואלט",
+      status: "מלאכתו לאיסור",
+      source: "ש\"ח הערה תקט\"ו"
+    },
+    {
       name: "גליל נייר טואלט ריק",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גליל נייר כסף",
@@ -375,12 +416,12 @@ export const gimelMuktzeh = {
     {
       name: "גליל נייר סופג",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גליל נייר של מיטת רופא",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גליל שקיות ניילון",
@@ -395,7 +436,7 @@ export const gimelMuktzeh = {
     {
       name: "גמבוי",
       status: "מוקצה מחמת חסרון כיס",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גניזה שלא ניתן לקרוא",
@@ -414,14 +455,14 @@ export const gimelMuktzeh = {
     },
     {
       name: "גפרור ביו\"ט",
-      status: "מחלוקת",
-      source: "ש\"ח",
-      description: "מלאכתו לאיסור וי\"א להיתר"
+      status: "מלאכתו לאיסור",
+      source: "",
+      description: "וי\"א להיתר"
     },
     {
       name: "גפרור משומש",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח",
+      source: "",
       description: "ביו\"ט מלאכתו להיתר"
     },
     {
@@ -433,7 +474,7 @@ export const gimelMuktzeh = {
     {
       name: "ג'ק לרכב",
       status: "מלאכתו לאיסור שאין בו היתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "ג'ק לרכב עם גלגלים",
@@ -443,12 +484,18 @@ export const gimelMuktzeh = {
     {
       name: "גרבי גומי",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
+    },
+    {
+      name: "גרביים",
+      status: "מותר",
+      source: "",
+      description: "ראה בגד"
     },
     {
       name: "גרביים אלסטיות",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גרביים חדשות תפורות",
@@ -459,27 +506,27 @@ export const gimelMuktzeh = {
     {
       name: "גרזן",
       status: "מלאכתו לאיסור שאין בו היתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גרטל",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גריז",
       status: "מלאכתו לאיסור שאין בו היתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גריל",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גריל ביום טוב",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גריסים לא מבושלים",
@@ -494,17 +541,17 @@ export const gimelMuktzeh = {
     {
       name: "ג'ריקן",
       status: "מלאכתו להיתר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "ג'ריקן לחומרי הדברה וריסוס",
       status: "מלאכתו לאיסור",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גרעין אבוקדו",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גרעין אבטיח",
@@ -540,7 +587,7 @@ export const gimelMuktzeh = {
     {
       name: "גרעין משמש",
       status: "מוקצה מחמת גופו",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גרעין משמש \"בלאדי\"",
@@ -549,13 +596,13 @@ export const gimelMuktzeh = {
     },
     {
       name: "גרעין משמש בבית עם ילדים",
-      status: "מחלוקת",
+      status: "מוקצה מחמת גופו",
       source: "ש\"ח סעיף ע\"ה",
       description: "לבני ספרד מוקצה, אך לבני אשכנז וכן לקטנים מבני ספרד, מלאכתו להיתר"
     },
     {
       name: "גרעין משמש ביו\"ט",
-      status: "מוקצה מחמת גופו",
+      status: "מוקצה",
       source: "ש\"ח סע\"ה",
       description: "מוקצה בכל אופן אם פתחוהו ביו\"ט"
     },
@@ -587,18 +634,18 @@ export const gimelMuktzeh = {
     {
       name: "גרעינים שחורים ולבנים לא קלויים",
       status: "מותר",
-      source: "ש\"ח"
+      source: ""
     },
     {
       name: "גשם מטונף",
       status: "מוקצה",
-      source: "ש\"ח",
+      source: "",
       description: "ראה ברד"
     },
     {
       name: "גשם נקי בכלי",
       status: "מותר",
-      source: "ש\"ח",
+      source: "",
       description: "ראה ברד"
     },
     {
@@ -608,4 +655,4 @@ export const gimelMuktzeh = {
       description: "ויש אומרים מלאכתו להיתר"
     }
   ]
-}; 
+};

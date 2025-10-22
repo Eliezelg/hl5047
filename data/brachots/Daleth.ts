@@ -7,7 +7,7 @@ export const dalethBrachot: BlessingCategory = {
       name: "דבדב",
       firstBlessing: "שהכל",
       lastBlessing: "נפשות",
-      description: "פרי ממשפחת ההדרים המיועד לתיבול, הכנת ריבות וכדו', אינו נאכל בפני עצמו"
+      description: "פרי ממשפחת ההדרים המיועד לתיבול, הכנת ריבות וכדו', אינו נאכל בפני עצמו. וכדין תבלינים טעימים"
     },
     {
       name: "דבש תמרים או דבורים",
@@ -69,27 +69,27 @@ export const dalethBrachot: BlessingCategory = {
       name: "5 דגנים",
       firstBlessing: "מזונות",
       lastBlessing: "על המחיה",
-      description: "חברת מצ'הלך, מצות כרמל. לא ידוע כמה הם אחוזי הדגן ולכן יש לאכול כ-60-70 גרם ולברך על המחיה"
+      description: "חברת מצ'הלך, מצות כרמל. לא ידוע כמה הם אחוזי הדגן ולכן יש לאכול כ-60-70 גרם"
     },
     {
-      name: "דגני בוקר אפיפיות",
+      name: "דגני בוקר (אפיפיות)",
       firstBlessing: "מזונות",
       lastBlessing: "על המחיה",
-      description: "לא ידוע כמה הם אחוזי הדגן ולכן יש לאכול כ-60-70 גרם ולברך על המחיה"
+      description: "לא ידוע כמה הם אחוזי הדגן ולכן יש לאכול כ-60-70 גרם"
     },
     {
-      name: "דגני בוקר אוסם",
+      name: "דגני בוקר (חברת אוסם)",
       firstBlessing: "מזונות",
       lastBlessing: "על המחיה",
-      description: "לא ידוע כמה הם אחוזי הדגן ולכן יש לאכול כ-60-70 גרם ולברך על המחיה"
+      description: "לא ידוע כמה הם אחוזי הדגן ולכן יש לאכול כ-60-70 גרם"
     },
     {
-      name: "דגני בוקר טעמן",
+      name: "דגני בוקר (חברת טעמן)",
       firstBlessing: "שהכל",
       lastBlessing: "נפשות"
     },
     {
-      name: "דגני בוקר מפעלי דגן",
+      name: "דגני בוקר (חברת מפעלי דגן)",
       firstBlessing: "אדמה",
       lastBlessing: "נפשות"
     },
@@ -130,10 +130,10 @@ export const dalethBrachot: BlessingCategory = {
       description: "חברת ריבוע כחול"
     },
     {
-      name: "דגני בוקר עם חלב",
+      name: "דגני בוקר שברכתם מזונות עם חלב",
       firstBlessing: "מזונות",
       lastBlessing: "על המחיה",
-      description: "אם העיקר זה הדגנים מברך רק מזונות, ואם גם החלב עיקר, מברך שתי ברכות. ברכה אחרונה, רק על המחיה, ובתנאי שאכל שיעור מספיק מהדגן תוך 4-7 דקות"
+      description: "אם העיקר זה הדגנים מברך רק מזונות, ואם גם החלב עיקר, מברך שתי ברכות. ברכה אחרונה, רק על המחיה, ובתנאי שאכל שיעור מספיק מהדגן תוך 4-7 דקות, ראה כל ערך בפני עצמו"
     },
     {
       name: "דגנית",
@@ -197,7 +197,7 @@ export const dalethBrachot: BlessingCategory = {
       name: "דייסת אורז",
       firstBlessing: "מזונות",
       lastBlessing: "נפשות",
-      description: "אם הדייסא נוזלית מאוד, שהכל ונפשות"
+      description: "ואם הדייסא נוזלית מאוד, שהכל ונפשות"
     },
     {
       name: "דייסת סובין",
@@ -215,7 +215,7 @@ export const dalethBrachot: BlessingCategory = {
       name: "דייסת קורנפלור",
       firstBlessing: "שהכל",
       lastBlessing: "נפשות",
-      description: "אם הדייסא קצת סמיכה שצריך לגלגלה בלשונו, שיעורה בכזית (27 גרם) תוך 4-7 דקות. ואם היא נוזלית לחלוטין שלא צריך כלל למועכה בפיו או לגלגלה בלשונו, שיעורה רביעית (81 גרם) תוך 3-4 שניות"
+      description: "עמילן תירס / כוסמת / דוחן / ערמונים. אם הדייסא קצת סמיכה שצריך לגלגלה בלשונו, שיעורה בכזית (27 גרם) תוך 4-7 דקות. ואם היא נוזלית לחלוטין שלא צריך כלל למועכה בפיו או לגלגלה בלשונו, שיעורה רביעית (81 גרם) תוך 3-4 שניות"
     },
     {
       name: "דלורית",
@@ -243,7 +243,7 @@ export const dalethBrachot: BlessingCategory = {
     },
     {
       name: "דלעת",
-      firstBlessing: "האדמה",
+      firstBlessing: "אדמה",
       lastBlessing: "",
       description: "מבושלים האדמה, חיים שהכל"
     },
@@ -315,24 +315,6 @@ export const dalethBrachot: BlessingCategory = {
       name: "דפי אורז",
       firstBlessing: "מזונות",
       lastBlessing: "נפשות"
-    },
-    {
-      name: "דפי לזניה",
-      firstBlessing: "מזונות",
-      lastBlessing: "על המחיה",
-      description: "אם בישלם במים, המוציא וברכת המזון"
-    },
-    {
-      name: "דקל תמר",
-      firstBlessing: "עץ",
-      lastBlessing: "על העץ",
-      description: "פרי הדקל הנפוץ ביותר"
-    },
-    {
-      name: "דקל קוקוס",
-      firstBlessing: "עץ",
-      lastBlessing: "נפשות",
-      description: "פרי הדקל הטרופי"
     }
   ]
-} 
+}
