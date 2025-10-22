@@ -1,5 +1,5 @@
 'use client';
-import { reahItems } from '@/data/reah/reah';
+import { reahItems, ReahItem } from '@/data/reah/reah';
 import { useState, useMemo } from 'react';
 import { NoSelect } from '../../components/NoSelect';
 
@@ -87,7 +87,7 @@ export default function ReachPage() {
         {/* Items List */}
         <div className="max-w-4xl mx-auto">
           <div className="space-y-4">
-            {filteredItems.map((item, index) => (
+            {filteredItems.map((item: ReahItem, index: number) => (
               <div
                 key={`${item.name}-${index}`}
                 className="bg-white rounded-lg shadow-md p-4"
